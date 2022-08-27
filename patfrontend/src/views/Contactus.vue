@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-md-6 col-lg-4">
           <div class="contact-box">
-            <i class="flaticon-call"></i>
+            <i class="fas fa-phone"></i>
             <div class="box">
               <a class="phone" href="tel:+255767029904">+255 767 029 904</a>
               <a class="phone" href="tel:+255754047857">+255 754 047 857</a>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-6 col-lg-4">
           <div class="contact-box">
-            <i class="flaticon-email"></i>
+            <i class="fas fa-envelope-open-text"></i>
             <div class="box">
               <a class="mail" href="mailto:info@pediatrics.or.tz">info@pediatrics.or.tz</a>
               <a class="mail" href="mailto:tjacob@pediatrics.or.tz">tjacob@pediatrics.or.tz</a>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-6 col-lg-4">
           <div class="contact-box">
-            <i class="flaticon-location"></i>
+           <i class="fas fa-map-pin"></i>
             <div class="box">
               <p>4TH FLOOR PAEDIATRIC COMPLEX, Muhimbili, Dar es Salaam</p>
             </div>
