@@ -9,7 +9,6 @@ class Project(models.Model):
     specificObjective = models.TextField(_("Specific Objective"))
     enddate = models.DateField(_("End Date"), auto_now=False, auto_now_add=False)
 
-    
 
     class Meta:
         verbose_name = _("Project")
@@ -22,9 +21,6 @@ class ProjectGoal(models.Model):
     project = models.ForeignKey(Project, verbose_name=_(""), on_delete=models.CASCADE)
     goal = models.CharField(_("Project Goal"), max_length=150)
     results = models.CharField(_("Project Result"), max_length=180)
-
-
-    
 
     class Meta:
         verbose_name = _("project goal")
