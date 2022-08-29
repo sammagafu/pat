@@ -56,12 +56,12 @@
               Government of Tanzania in ensuring equitable access to quality health services for children and
               adolescents through various interventions including but not limited to</p>
             <ul class="last">
-              <li>Developing and disseminating guidelines, standard operating procedures and job aids pertaining to
+              <li><i class="fa fa-check"></i> Developing and disseminating guidelines, standard operating procedures and job aids pertaining to
                 paediatric and child health</li>
-              <li>Informing policy development</li>
-              <li>Researching</li>
-              <li>Implementing Projects</li>
-              <li>Professional conduct</li>
+              <li><i class="fa fa-check"></i> Informing policy development</li>
+              <li><i class="fa fa-check"></i> Researching</li>
+              <li><i class="fa fa-check"></i> Implementing Projects</li>
+              <li><i class="fa fa-check"></i> Professional conduct</li>
             </ul>
           </div>
         </div>

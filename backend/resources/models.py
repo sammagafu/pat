@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 class Resource(models.Model):
     title = models.CharField(_("Document Name"), max_length=160)
     file = models.FileField(_("File Name"),upload_to="uploads/documents")
+    published = models.BooleanField(_("Published"),default=False)
+    created = models.DateTimeField(_("Created at"), auto_now=True,)
     description = models.TextField(_("Descriptions"))
 
 

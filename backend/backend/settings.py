@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9ek0)i9t9@blgd^*10e$s!9!tqh&+#j^r%+dod*ct)g#g^w1n7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'djoser',
+    'rest_framework',
     'rest_framework.authtoken',
 ]
 
@@ -115,6 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+CORS_ALLOWED_ORIGINS = [
+    "https://www.pediatrics.or.tz/",
+    "http://localhost:5173",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
