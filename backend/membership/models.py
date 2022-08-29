@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
+
 
 
 
@@ -102,3 +104,40 @@ class User(AbstractUser):
         elif self.typeofmember == "Ordinary Member":
             self.memberId = "pat-od-"+str(self.pk)
         super(User,self).save()
+
+MEMBERSHIP_CHOICES = (
+    ('Associate Plan', 'Associate Plan'),
+    ('Ordinary Plan', 'Ordinary Plan'),
+)
+
+
+class Membership(models.Model):
+    slug = models.SlugField()
+    membership_type = models.CharField(
+        choices=MEMBERSHIP_CHOICES,
+        default='Associate Plan',
+        max_length=30)
+    price = models.IntegerField(default=15)
+    planId = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.membership_type
+
+class UserMembership(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    membership = models.ForeignKey(
+        Membership, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.user.username
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    active = models.BooleanField(default=False)
+
+class PaymentDate(models.Model):
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    price = models.IntegerField(default=15)
+    created = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
+    expire = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
