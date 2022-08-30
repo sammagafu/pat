@@ -49,8 +49,12 @@
                                     <router-link :to="{name:'about'}" class="link-level-1">About Us</router-link>
                                 </li>
 
-                                <li class="item-level-1" data-v-577b7a29="">
+                                <li class="item-level-1">
                                     <a href="https://pat.co.tz/" class="link-level-1">Conferences</a>
+                                </li>
+
+                                <li class="item-level-1">
+                                    <router-link :to="{name:'resources'}" class="link-level-1">Resources</router-link>
                                 </li>
 
                                  <li class="item-level-1">
