@@ -50,7 +50,14 @@
                                 </li>
 
                                 <li class="item-level-1">
+                                    <router-link :to="{name:'projects'}" class="link-level-1">Membership</router-link>
+                                </li>
+
+                                <li class="item-level-1">
                                     <a href="https://pat.co.tz/" class="link-level-1">Conferences</a>
+                                </li>
+                                <li class="item-level-1">
+                                    <router-link :to="{name:'projects'}" class="link-level-1">Projects</router-link>
                                 </li>
 
                                 <li class="item-level-1">
@@ -59,6 +66,10 @@
 
                                  <li class="item-level-1">
                                     <router-link :to="{name:'contact'}" class="link-level-1">Contact Us</router-link>
+                                </li>
+
+                                <li class="item-level-1">
+                                    <router-link :to="{name:'contact'}" class="link-level-1">Login</router-link>
                                 </li>
                             </ul>
                         </div>
