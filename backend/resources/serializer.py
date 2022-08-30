@@ -4,4 +4,4 @@ from .models import Resource
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
-        fields = ['id','title', 'file', 'published', 'published', 'created']
+        fields = ['id','title', 'file','description','published', 'published', 'created']

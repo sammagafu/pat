@@ -24,26 +24,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="faq">
+                    <template v-if="resources">
+                        <div class="faq" v-for="(resources,index) in resources" :key="resources.index">
                         <div class="faq-box">
                             <h5 class="question-header">
-                                <button class="btn btn-primary click" type="button" data-bs-toggle="collapse"
+                                {{resources.title}}
+                                <!-- <button class="btn btn-primary click" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#faqs-1" aria-expanded="false" aria-controls="faqs-1">How can i find
                                     a job ?<i class="fas fa-angle-right"></i>
-                                </button>
+                                </button> -->
                             </h5>
                             <div class="collapse show" id="faqs-1">
                                 <div class="card card-body about-text">
-                                    <b>Petrol Are A Professional Industry and Manufacturing Services Provider
-                                        Institutions. Suitable For Factory, Manufacturing, Industry and any Industrial
-                                        related business field.</b> Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit, sed do eiusm tmpor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                    commodo consequat adipisicing elit, sed do eiusm tempor incididunt ut labore.
+                                    {{resources.description}}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -60,8 +58,18 @@ export default {
     },
     methods:{
         getResources(){
-            axios.get("http://localhost:8000/api/v1/resources/")
+            axios.get("http://localhost:8000/api/v1/resource/")
+            .then(response => {
+                        this.resources = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
+    },
+    mounted (){
+        this.getResources()
     }
+
 }
 </script>
