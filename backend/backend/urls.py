@@ -10,5 +10,5 @@ urlpatterns = [
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/resource/',include('resources.urls')),
     path('api/v1/project/',include('project.urls')),
-    path('api/v1/updates/',include('updates.urls')),
+    path('api/v1/update/',include('updates.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
