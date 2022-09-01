@@ -50,7 +50,7 @@
                                 </li>
 
                                 <li class="item-level-1">
-                                    <router-link :to="{name:'projects'}" class="link-level-1">Membership</router-link>
+                                    <router-link :to="{name:'membership'}" class="link-level-1">Membership</router-link>
                                 </li>
 
                                 <li class="item-level-1">
@@ -69,7 +69,7 @@
                                 </li>
 
                                 <li class="item-level-1">
-                                    <router-link :to="{name:'contact'}" class="link-level-1">Login</router-link>
+                                    <router-link :to="{name:'login'}" class="link-level-1">Login</router-link>
                                 </li>
                             </ul>
                         </div>
