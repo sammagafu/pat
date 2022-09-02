@@ -20,7 +20,7 @@
         </div>
     </section>
 
-    <section class="about-us about-us-3 py-100">
+    <section class="about-us about-us-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">

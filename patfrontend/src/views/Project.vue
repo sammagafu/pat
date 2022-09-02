@@ -18,7 +18,7 @@
             </div>
         </div>
     </section>
-    <section class="blog py-100-70">
+    <section class="blog">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -26,21 +26,16 @@
                             <div class="col-md-12">
                                 <div class="blog-item" v-for="proj in projects" :key="proj">
                                     <div class="img-box">
-                                        <a href="01_single-blog.html" class="open-post">
-                                            <img class="img-fluid"  alt="{{proj.projectname}}" :src="proj.cover">
-                                        </a>
+                                        <router-link :to="{name:'projectdetail',params:{slug:proj.slug}}"><img class="img-fluid"  alt="{{proj.projectname}}" :src="proj.cover"></router-link>
                                         <ul>
                                             <li>{{proj.donor.donors}}</li>
                                         </ul>
                                     </div>
                                     <div class="text-box">
                                         <span class="blog-date">Start Date {{proj.startdate}}</span>
-                                        <router-link :to="{name:'projectdetail',params}"></router-link>
-                                        <a href="01_single-blog.html" class="title-blog">
-                                            <h5>{{proj.projectname}}</h5>
-                                        </a>
+                                        <router-link :to="{name:'projectdetail',params:{slug:proj.slug}}"><h5>{{proj.projectname}}</h5></router-link>
                                         <p>{{proj.shortdescription}}</p>
-                                        <a href="01_single-blog.html" class="link">Discover More</a>
+                                        <router-link :to="{name:'projectdetail',params:{slug:proj.slug}}" class="link">Discover More</router-link>
                                     </div>
                                 </div>
                             </div>
