@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+import random
+
 
 
 
@@ -82,27 +84,27 @@ class User(AbstractUser):
     ]
     
     middlename = models.CharField(_("Middle Name"), max_length=50)
-    mctnumber = models.CharField(_("MCT Number"), max_length=50)
+    mctnumber = models.CharField(_("MCT Number"), max_length=50,unique=True)
     gender = models.CharField(_("Gender"), max_length=8,choices=GENDER)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # Validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True,unique=True) # Validators should be a list
     region = models.CharField(_("Region"), max_length=50,choices=REGION)
     organization = models.CharField(_("Your Organization"), max_length=180)
     profession = models.CharField(_("Your Profession"), max_length=180,choices=Proffesion)
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
     typeofmember = models.CharField(_("Membership type"), max_length=180,choices=TypeOfMember)
-    memberId = models.SlugField(_("Membership Identification"))
+    memberId = models.SlugField(_("Membership Identification"),editable=False,unique=True)
     
 
 
     def __str__(self):
-        return self.user.username
+        return self.username
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Associate Member":
-            self.memberId = "pat-am-"+str(self.pk)
+            self.memberId = "pat-am-"+ random.randint(0, 1000)
         elif self.typeofmember == "Ordinary Member":
-            self.memberId = "pat-od-"+str(self.pk)
+            self.memberId = "pat-od-"+ random.randint(0,1000)
         super(User,self).save()
 
 MEMBERSHIP_CHOICES = (
