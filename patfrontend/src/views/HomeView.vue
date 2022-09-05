@@ -7,15 +7,32 @@
           <div class="overlay"></div>
           <div class="container">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-8">
                 <div class="banner">
                   <h1 class="handline">Welcome to The Paediatric Association Of Tanzania</h1>
-                  <p class="about-website">We maintain and improve the standards of professional competence and conduct Of All The Members Related To Paediatrics And Child Health.</p>
+                  <p class="about-website">We maintain and improve the standards of professional competence and conduct
+                    Of All The Members Related To Paediatrics And Child Health.</p>
                   <a class="btn-1 move-section" href="#start">Let's Start</a>
                   <a class="btn-1 btn-2 ml-30" href="01_department.html">Our Department</a>
                 </div>
               </div>
             </div>
+
+            <!-- add -->
+            <!-- <div class="row mt-3">
+              <div class="col-sm-12 col-lg-6 col-offeset-6">
+                <div class="features-box">
+                  <a href="https://pat.co.tz">
+                    <div class="item bg-danger blink">
+                      <h4 class="mb-3">23rd PAT Annual General Meeting <br> &amp;
+                        Scientific Conference </h4>
+                      <p class="text-white">click here for registration, abstract submission <br> and booth Display </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div> -->
+            <!-- ads ends here -->
           </div>
         </div>
       </div>
@@ -29,7 +46,8 @@
           <div class="features-item one">
             <div class="item-text">
               <h4>Login To Your Account</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your Account here.</p>
+              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
+                Account here.</p>
               <a class="make-appoinment" href="01_appointment.html">Make Appoinment</a>
             </div>
           </div>
@@ -38,7 +56,8 @@
           <div class="features-item two">
             <div class="item-text">
               <h4>Collaborate</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your Account here.</p>
+              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
+                Account here.</p>
               <a class="make-appoinment" href="01_appointment.html">Make Appoinment</a>
             </div>
           </div>
@@ -47,7 +66,8 @@
           <div class="features-item three">
             <div class="item-text">
               <h4>Become A Member</h4>
-              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your Account here.</p>
+              <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
+                Account here.</p>
               <a class="timetable" href="01_doctors-timetable.html">Discover Timetable</a>
             </div>
           </div>
@@ -70,20 +90,24 @@
             <div class="sec-title">
               <h2>Welcome To The Pediatrics Association Of Tanzania</h2>
               <h3>Optimal Health For Children And Adolescents</h3>
-              <p class="sec-explain">Our Mission Is To Promote Optimal Physical, Mental, And Social Wellbeing For All Children And Adolescents Through Sharing Knowledge Innovations And Expertise</p>
+              <p class="sec-explain">Our Mission Is To Promote Optimal Physical, Mental, And Social Wellbeing For All
+                Children And Adolescents Through Sharing Knowledge Innovations And Expertise</p>
             </div>
             <ul class="about-core">
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To provide organizational means for health workers to come together as a professional body and to project its outlook and image in the best interests of society.</h4>
+                <h4>To provide organizational means for health workers to come together as a professional body and to
+                  project its outlook and image in the best interests of society.</h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To set, maintain and improve the standards of professional competence and conduct of all the members related to Paediatrics and Child health. </h4>
+                <h4>To set, maintain and improve the standards of professional competence and conduct of all the members
+                  related to Paediatrics and Child health. </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To promote and advance the practice and study of Pediatrics and Child Health in the United Republic of Tanzania.</h4>
+                <h4>To promote and advance the practice and study of Pediatrics and Child Health in the United Republic
+                  of Tanzania.</h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
@@ -95,11 +119,13 @@
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To liaise by meetings, correspondence or otherwise with other Pediatrics Associations and Societies. </h4>
+                <h4>To liaise by meetings, correspondence or otherwise with other Pediatrics Associations and Societies.
+                </h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4> To establish projects and programs independently or in collaboration with other stake holders with the aim of improving child care and community health in Tanzania.</h4>
+                <h4> To establish projects and programs independently or in collaboration with other stake holders with
+                  the aim of improving child care and community health in Tanzania.</h4>
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
@@ -107,7 +133,8 @@
               </li>
               <li>
                 <i class="fas fa-check-double" aria-hidden="true"></i>
-                <h4>To do all such other things as may be conducive to the attainment of the foregoing aims and objectives or any one of them.</h4>
+                <h4>To do all such other things as may be conducive to the attainment of the foregoing aims and
+                  objectives or any one of them.</h4>
               </li>
             </ul>
           </div>
@@ -227,13 +254,17 @@
   </div>
 </template>
 <style>
-  .about-website {
-    text-transform: capitalize !important;
-  }
+.about-website {
+  text-transform: capitalize !important;
+}
 
-  .header-img {
-    background-position: center;
-    background-image: url(../assets/images/header/04_header.jpg);
-    /* style="background-image: url(/assets/images/header/04_header.jpg) */
-  }
+.header-img {
+  background-position: center;
+  background-image: url(../assets/images/header/04_header.jpg);
+  /* style="background-image: url(/assets/images/header/04_header.jpg) */
+}
+.features-box{
+  padding: 20 !important;
+}
+
 </style>

@@ -28,10 +28,13 @@ const router = createRouter({
       ]
     },
     {
-      path: '/projects',
-      name: 'projects',
-      component: () => import('@/views/Project.vue'),
+      path: '/projects/',
       children : [
+        {
+          path:"",
+          name: 'projects',
+          component: () => import('@/views/Project.vue'),
+        },
         {
           path:':slug',
           name:'projectdetail',
@@ -55,7 +58,12 @@ const router = createRouter({
           path:'login',
           name:'login',
           component : () => import('@/views/Login.vue')
-        }
+        },
+        {
+          path:'register',
+          name:'register',
+          component : () => import('@/views/Register.vue')
+        },
       ]
     }
 
