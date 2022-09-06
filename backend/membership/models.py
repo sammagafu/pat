@@ -102,9 +102,9 @@ class User(AbstractUser):
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Associate Member":
-            self.memberId = "pat-am-"+ random.randint(0, 1000)
+            self.memberId = "pat-am-"+ str(random.randint(0, 1000))
         elif self.typeofmember == "Ordinary Member":
-            self.memberId = "pat-od-"+ random.randint(0,1000)
+            self.memberId = "pat-od-"+ str(random.randint(0,1000))
         super(User,self).save()
 
 MEMBERSHIP_CHOICES = (
