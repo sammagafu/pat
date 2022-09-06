@@ -11,7 +11,7 @@ class Updates(models.Model):
     cover = models.ImageField(_("Cover Image"), upload_to="blog/covers/")
     content = QuillField()
     created = models.DateTimeField(_("Created at"), auto_now=True,)
-    downloads = models.IntegerField(_("Number Downloads"),default=0)
+    downloads = models.IntegerField(_("Number Of Views"),default=0,editable=False)
 
     class Meta:
         verbose_name = _("Updates")

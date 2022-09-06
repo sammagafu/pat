@@ -5,21 +5,19 @@
         </div>
         <div class="container">
             <div class="col-md-4 offset-md-4">
-
-                <!-- Pills content -->
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        <form>
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                        <form @submit.prevent="login">
                             <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="email" id="loginName" class="form-control" />
+                            <div class="form-group mb-4">
                                 <label class="form-label" for="loginName">Email or username</label>
+                                <input type="email" id="loginName" class="form-control" :model="email"/>
+                                
                             </div>
 
                             <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" id="loginPassword" class="form-control" />
+                            <div class="form-group mb-4">
                                 <label class="form-label" for="loginPassword">Password</label>
+                                <input type="password" id="loginPassword" class="form-control" :model="password"/>
                             </div>
 
                             <!-- 2 column grid layout -->
@@ -27,9 +25,10 @@
                                 <div class="col-md-6 d-flex justify-content-center">
                                     <!-- Checkbox -->
                                     <div class="form-check mb-3 mb-md-0">
+                                        <label class="form-check-label" for="loginCheck"> Remember me </label>
                                         <input class="form-check-input" type="checkbox" value="" id="loginCheck"
                                             checked />
-                                        <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                        
                                     </div>
                                 </div>
 
@@ -44,13 +43,42 @@
 
                             <!-- Register buttons -->
                             <div class="text-center">
-                               <router-link :to="{name:'register'}" class="btn-1 btn-5 sec-btn">Not a member? Register</router-link>
+                               <p>Not a member? <router-link :to="{name:'register'}"> Register</router-link></p>
                             </div>
                         </form>
                     </div>
-                </div>
-                <!-- Pills content -->
             </div>
         </div>
     </section>
 </template>
+
+<script>
+    import axios from 'axios';
+    export default{
+        data(){
+            return {
+                email : '',
+                password : '',
+                rememberme : true
+            }
+        },
+        computed(){
+        },
+        methods : {
+            login (){
+                
+            }
+        }
+    }
+</script>
+
+<style>
+    a{
+        color: #1A3D7D;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    a:hover{
+        color: darkblue;
+    }
+</style>
