@@ -11,7 +11,7 @@ import './assets/css/lity.min.css'
 import './assets/css/style.css'
 
 
-
+// axios.defaults.baseURL = 'http://localhost:8000/api/v1/'
 const app = createApp(App)
 
 app.use(createPinia())

@@ -170,3 +170,7 @@ DJOSER = {
 }
 
 AUTH_USER_MODEL = 'membership.User'
+
+{
+    'user': 'membership.serializers.UserSerializer',
+}

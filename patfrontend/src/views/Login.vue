@@ -10,14 +10,14 @@
                             <!-- Email input -->
                             <div class="form-group mb-4">
                                 <label class="form-label" for="loginName">Email or username</label>
-                                <input type="email" id="loginName" class="form-control" :model="email"/>
+                                <input type="email" id="loginName" class="form-control" v-model="email"/>
                                 
                             </div>
 
                             <!-- Password input -->
                             <div class="form-group mb-4">
                                 <label class="form-label" for="loginPassword">Password</label>
-                                <input type="password" id="loginPassword" class="form-control" :model="password"/>
+                                <input type="password" id="loginPassword" class="form-control" v-model="password"/>
                             </div>
 
                             <!-- 2 column grid layout -->
@@ -54,6 +54,8 @@
 
 <script>
     import axios from 'axios';
+    import { userStore } from "@/stores/usersStore";
+
     export default{
         data(){
             return {
@@ -65,8 +67,46 @@
         computed(){
         },
         methods : {
-            login (){
-                
+            async login (){
+                const loginData = {
+                    email: this.email,
+                    password: this.password
+                }
+
+                await axios.post('http://localhost:8000/api/v1/auth/token/login/', loginData)
+                    .then(response => {
+                        const token = response.data.auth_token
+                        // this.$store.commit('setToken', token)
+                        // axios.defaults.headers.common["Authorization"] = "Token " + token
+                        // localStorage.setItem("token", token)
+                        // const toPath = this.$route.query.to || '/cart'
+                        // this.$router.push(toPath)
+                    }).catch(error => {
+                        if (error.response) {
+                            for (const property in error.response.data) {
+                                this.errors.push(`${property}: ${error.response.data[property]}`)
+                            }
+                        } else {
+                            this.errors.push('Something went wrong. Please try again')
+                            console.log(JSON.stringify(error))
+                        }
+                    })
+
+                await axios
+                    .get('http://localhost:8000/api/v1/auth/users/me/')
+                    .then(response => {
+                        this.$store.commit('setUser', {
+                            'id': response.data.id,
+                            'email': response.data.email
+                        })
+                        localStorage.setItem('email', response.data.email)
+                        localStorage.setItem('userid', response.data.id)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+                // console.log(loginData)
             }
         }
     }
