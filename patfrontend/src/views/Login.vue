@@ -54,7 +54,9 @@
 
 <script>
     import axios from 'axios';
-    import { userStore } from "@/stores/usersStore";
+    import { authStore } from "@/stores/usersStore";
+
+    const userStore = authStore()
 
     export default{
         data(){
@@ -76,20 +78,24 @@
                 await axios.post('http://localhost:8000/api/v1/auth/token/login/', loginData)
                     .then(response => {
                         const token = response.data.auth_token
-                        // this.$store.commit('setToken', token)
-                        // axios.defaults.headers.common["Authorization"] = "Token " + token
-                        // localStorage.setItem("token", token)
-                        // const toPath = this.$route.query.to || '/cart'
-                        // this.$router.push(toPath)
+                        // console.log(response.data)
+                        userStore.token = token
+                        userStore.isAuthenticated =true
+                        localStorage.setItem('token', JSON.stringify(token));
+                        axios.defaults.headers.common["Authorization"] = "Token " + token
+                        const toPath = this.$route.query.to || '/membership'
+                        this.$router.push(toPath)
                     }).catch(error => {
-                        if (error.response) {
-                            for (const property in error.response.data) {
-                                this.errors.push(`${property}: ${error.response.data[property]}`)
-                            }
-                        } else {
-                            this.errors.push('Something went wrong. Please try again')
-                            console.log(JSON.stringify(error))
-                        }
+                        console.log(error)
+
+                        // if (error.response) {
+                        //     for (const property in error.response.data) {
+                        //         this.errors.push(`${property}: ${error.response.data[property]}`)
+                        //     }
+                        // } else {
+                        //     this.errors.push('Something went wrong. Please try again')
+                        //     console.log(JSON.stringify(error))
+                        // }
                     })
 
                 await axios

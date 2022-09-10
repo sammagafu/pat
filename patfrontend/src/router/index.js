@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { authStore } from "@/stores/usersStore"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,9 @@ const router = createRouter({
     {
       path: '/resources',
       name: 'resources',
+      meta: {
+        requireLogin: true
+      },
       component: () => import('../views/Resources.vue'),
       children : [
 
@@ -29,6 +33,7 @@ const router = createRouter({
     },
     {
       path: '/projects/',
+      
       children : [
         {
           path:"",
@@ -45,6 +50,9 @@ const router = createRouter({
     {
       path: '/membership',
       name: 'membership',
+      meta: {
+        requireLogin: true
+      },
       component: () => import('../views/Membership.vue'),
       children : [
 
@@ -69,5 +77,28 @@ const router = createRouter({
 
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const store = authStore()
+  if (to.matched.some(record => record.meta.requireLogin) && !store.isAuthenticated) {
+    next('account/login')
+  } else {
+    next()
+  }
+})
+
+
+// router.beforeEach(async (to, from) => {
+//   const store = authStore()
+//   if (
+//     // make sure the user is authenticated
+//     !store.isAuthenticated &&
+//     // ❗️ Avoid an infinite redirect
+//     to.name !== 'Login'
+//   ) {
+//     // redirect the user to the login page
+//     return { name: 'login' }
+//   }
+// })
 
 export default router
