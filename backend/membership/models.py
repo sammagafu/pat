@@ -128,13 +128,6 @@ class Membership(models.Model):
     def __str__(self):
         return self.membership_type
 
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#     instance.profile.save()
-
-
 class UserMembership(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -153,3 +146,22 @@ class PaymentDate(models.Model):
     price = models.IntegerField(default=15)
     created = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
     expire = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name="avatar")
+    avatar = models.ImageField(default='default.jpg', upload_to='uploads/profile/')
+
+    def __str__(self):
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()
