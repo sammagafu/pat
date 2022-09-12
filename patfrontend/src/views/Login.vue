@@ -81,7 +81,6 @@
                 await axios.post('http://localhost:8000/api/v1/auth/token/login/', loginData)
                     .then(response => {
                         const token = response.data.auth_token
-                        // console.log(response.data)
                         userStore.token = token
                         userStore.isAuthenticated =true
                         localStorage.setItem('token', JSON.stringify(token));
@@ -93,9 +92,13 @@
                 await axios
                     .get('http://localhost:8000/api/v1/auth/users/me/')
                     .then(response => {
-                        this.$store.commit('setUser', {
-                            'id': response.data.id,
-                            'email': response.data.email
+                        // this.$store.commit('setUser', {
+                        //     'id': response.data.id,
+                        //     'email': response.data.email
+                        // })
+                        userStore.setUser({
+                            'id':response.data.id,
+                            'email':response.data.email,
                         })
                         localStorage.setItem('email', response.data.email)
                         localStorage.setItem('userid', response.data.id)

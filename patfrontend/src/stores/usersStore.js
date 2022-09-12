@@ -6,6 +6,10 @@ export const authStore = defineStore({
   state: () => ({
     isAuthenticated: false,
     token: JSON.parse(localStorage.getItem('token')),
+    user: {
+      id: 0,
+      email: ''
+    },
 
     
   }),
@@ -14,8 +18,8 @@ export const authStore = defineStore({
     doubleCount: (state) => state.counter * 2
   },
   actions: {
-    // increment() {
-    //   this.counter++
-    // }
+    setUser(user) {
+      this.user = user
+    },
   }
 })
