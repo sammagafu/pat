@@ -7,9 +7,9 @@ from django_quill.fields import QuillField
 # Create your models here.
 class Updates(models.Model):
     title =  models.CharField(_("Title"), max_length=180)
-    slug = models.SlugField(_("Slug"),unique=True)
+    slug = models.SlugField(_("Slug"),unique=True,editable=False)
     cover = models.ImageField(_("Cover Image"), upload_to="blog/covers/")
-    content = QuillField()
+    content = models.TextField()
     created = models.DateTimeField(_("Created at"), auto_now=True,)
     downloads = models.IntegerField(_("Number Of Views"),default=0,editable=False)
 

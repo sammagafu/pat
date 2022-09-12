@@ -3,19 +3,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                        <AuthSideBar />
-                    </div>
+                    <AuthSideBar />
+                </div>
                 <div class="col-md-8">
-                    <!-- <div class="col-md-12"  v-for="member in member" :key="member.id">
-                        <div class="row">
-                            <div class="col-md-3">&nbsp;</div>
-                            <div class="col-md-8">
-                                <h2>{{member.first_name}} {{member.middlename}} {{member.last_name}}</h2>
-                                <p>{{member.organization}}</p><p>{{member.region}}</p>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4" v-for="up in update">
+                            <div class="blog-item">
+                                <div class="img-box">
+                                    <!-- <a href="01_single-blog.html" class="open-post">
+                                        <img class="img-fluid" :src="up.cover" alt="01 Blog">
+                                    </a> -->
+                                    <router-link :to="{name:'udatedetail',params:{slug:up.slug}}" class="open-post"><img class="img-fluid" :src="up.cover" alt="01 Blog"></router-link>
+                                </div>
+                                <div class="text-box">
+                                    <span class="blog-date">{{up.created}}</span>
+                                    <a href="01_single-blog.html" class="title-blog">
+                                        <h5>{{up.title}}</h5>
+                                    </a>
+                                    <a href="01_single-blog.html" class="link">Discover More</a>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,30 +32,30 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    import AuthSideBar from '../components/AuthSideBar.vue';
+import axios from 'axios';
+import AuthSideBar from '../components/AuthSideBar.vue';
 
-    export default{
-        data(){
-            return {
-                update:[]
-            }
-        },
-        methods:{
-        getResources(){
-            axios.get("http://localhost:8000/api/v1/update/")
-            .then(response => {
-                        this.update = response.data;
-                        console.log(this.update)
-            })
-            .catch(error => {
-                console.log(error);
-            });
+export default {
+    data() {
+        return {
+            update: []
         }
     },
-    mounted (){
+    methods: {
+        getResources() {
+            axios.get("http://localhost:8000/api/v1/update/")
+                .then(response => {
+                    this.update = response.data;
+                    console.log(this.update)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    },
+    mounted() {
         this.getResources()
     },
     components: { AuthSideBar }
-    }
+}
 </script>

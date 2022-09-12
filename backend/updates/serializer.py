@@ -5,4 +5,5 @@ from .models import Updates
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Updates
-        fields = ['title','slug','cover','content','created','downloads']
+        fields = ['title','slug','cover','content','created']
+        read_only_fields = ['downloads']

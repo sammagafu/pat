@@ -55,7 +55,7 @@ class User(AbstractUser):
 
     Proffesion = [
         ('Administrator','Administrator'),
-        ('ommunity health worker','ommunity health worker'),
+        ('Community health worker','ommunity health worker'),
         ('First responder such as EMT or Paramedic','First responder such as EMT or Paramedic'),
         ('Medical doctor','Medical doctor'),
         ('Mental health provider such as counselor, psychologist, social worker','Mental health provider such as counselor, psychologist, social worker'),
