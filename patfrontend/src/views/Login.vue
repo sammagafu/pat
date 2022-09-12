@@ -70,6 +70,9 @@
         },
         methods : {
             async login (){
+                axios.defaults.headers.common["Authorization"] = ""
+                localStorage.removeItem("token")
+
                 const loginData = {
                     email: this.email,
                     password: this.password
@@ -83,19 +86,8 @@
                         userStore.isAuthenticated =true
                         localStorage.setItem('token', JSON.stringify(token));
                         axios.defaults.headers.common["Authorization"] = "Token " + token
-                        const toPath = this.$route.query.to || '/membership'
-                        this.$router.push(toPath)
                     }).catch(error => {
                         console.log(error)
-
-                        // if (error.response) {
-                        //     for (const property in error.response.data) {
-                        //         this.errors.push(`${property}: ${error.response.data[property]}`)
-                        //     }
-                        // } else {
-                        //     this.errors.push('Something went wrong. Please try again')
-                        //     console.log(JSON.stringify(error))
-                        // }
                     })
 
                 await axios
@@ -112,7 +104,8 @@
                         console.log(error)
                     })
 
-                // console.log(loginData)
+                    const toPath = this.$route.query.to || '/membership'
+                    this.$router.push(toPath)
             }
         }
     }
