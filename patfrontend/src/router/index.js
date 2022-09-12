@@ -81,7 +81,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = authStore()
   if (to.matched.some(record => record.meta.requireLogin) && !store.isAuthenticated) {
-    next('account/login')
+    next('/account/login')
   } else {
     next()
   }
