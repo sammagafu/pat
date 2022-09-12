@@ -6,7 +6,7 @@
                         <AuthSideBar />
                     </div>
                 <div class="col-md-8">
-                    <div class="col-md-12"  v-for="member in member" :key="member.id">
+                    <!-- <div class="col-md-12"  v-for="member in member" :key="member.id">
                         <div class="row">
                             <div class="col-md-3">&nbsp;</div>
                             <div class="col-md-8">
@@ -15,34 +15,38 @@
                             </div>
                         </div>
                         <hr>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </section>
 </template>
+
 <script>
-import axios from 'axios';
-import AuthSideBar from '../components/AuthSideBar.vue';
-export default {
-    data() {
-        return {
-            member: [],
-        };
-    },
-    mounted() {
-        this.getmebers();
-    },
-    methods: {
-        async getmebers() {
-            await axios.get("http://localhost:8000/api/v1/user/").then(response => {
-                this.member = response.data;
-                console.log(response.data);
-            }).catch(error => {
+    import axios from 'axios';
+    import AuthSideBar from '../components/AuthSideBar.vue';
+
+    export default{
+        data(){
+            return {
+                update:[]
+            }
+        },
+        methods:{
+        getResources(){
+            axios.get("http://localhost:8000/api/v1/update/")
+            .then(response => {
+                        this.update = response.data;
+                        console.log(this.update)
+            })
+            .catch(error => {
                 console.log(error);
             });
         }
     },
+    mounted (){
+        this.getResources()
+    },
     components: { AuthSideBar }
-}
+    }
 </script>

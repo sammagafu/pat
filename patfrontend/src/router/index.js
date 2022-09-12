@@ -21,7 +21,7 @@ const router = createRouter({
       component: () => import('../views/Contactus.vue')
     },
     {
-      path: '/resources',
+      path: '/resource',
       name: 'resources',
       meta: {
         requireLogin: true
@@ -29,6 +29,22 @@ const router = createRouter({
       component: () => import('../views/Resources.vue'),
       children : [
 
+      ]
+    },
+    {
+      path: '/update/',
+      
+      children : [
+        {
+          path:"",
+          name: 'updates',
+          component: () => import('@/views/Update.vue'),
+        },
+        {
+          path:':slug',
+          name:'udatedetail',
+          component: ()=> import('@/views/UpdateDetail.vue')
+        },
       ]
     },
     {
@@ -72,6 +88,11 @@ const router = createRouter({
           name:'register',
           component : () => import('@/views/Register.vue')
         },
+        {
+          path:'profile',
+          name:'profile',
+          component : () => import('@/views/MyProfile.vue')
+        },
       ]
     }
 
@@ -80,25 +101,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = authStore()
-  if (to.matched.some(record => record.meta.requireLogin) && !store.isAuthenticated) {
+  if (to.matched.some(record => record.meta.requireLogin) && !store.token) {
     next('/account/login')
   } else {
     next()
   }
 })
 
-
-// router.beforeEach(async (to, from) => {
-//   const store = authStore()
-//   if (
-//     // make sure the user is authenticated
-//     !store.isAuthenticated &&
-//     // ❗️ Avoid an infinite redirect
-//     to.name !== 'Login'
-//   ) {
-//     // redirect the user to the login page
-//     return { name: 'login' }
-//   }
-// })
 
 export default router

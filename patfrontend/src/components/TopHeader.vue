@@ -60,17 +60,19 @@
                                     <router-link :to="{name:'projects'}" class="link-level-1">Projects</router-link>
                                 </li>
 
-                                <li class="item-level-1">
-                                    <router-link :to="{name:'resources'}" class="link-level-1">Resources</router-link>
-                                </li>
-
                                  <li class="item-level-1">
                                     <router-link :to="{name:'contact'}" class="link-level-1">Contact Us</router-link>
                                 </li>
-
-                                <li class="item-level-1">
+                                <!-- {{userStore.token}} -->
+                                <li class="item-level-1" v-if="!userStore.token">
                                     <router-link :to="{name:'login'}" class="link-level-1">Login</router-link>
                                 </li>
+
+                                    <li class="item-level-1" v-else>
+                                    <router-link :to="{name:'login'}" class="link-level-1">Logout</router-link>
+                                    </li>
+                                
+                                
                             </ul>
                         </div>
                     </div>
@@ -83,3 +85,8 @@
     width: 40% !important;
 }
 </style>
+
+<script setup>
+        import { authStore } from "@/stores/usersStore";
+        const userStore = authStore()
+</script>
