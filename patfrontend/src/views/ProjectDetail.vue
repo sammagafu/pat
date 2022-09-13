@@ -71,7 +71,7 @@
         },
         methods:{
         getProductDetail(){
-            axios.get(`http://localhost:8000/api/v1/project/${this.$route.params.slug}`)
+            axios.get(`http://api.pediatrics.or.tz/api/v1/project/${this.$route.params.slug}`)
             .then(response => {
                         this.project = response.data;
                         document.title = 'PAT: ' + response.data.projectname

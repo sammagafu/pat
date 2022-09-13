@@ -78,7 +78,7 @@
                     password: this.password
                 }
 
-                await axios.post('http://localhost:8000/api/v1/auth/token/login/', loginData)
+                await axios.post('http://api.pediatrics.or.tz/api/v1/auth/token/login/', loginData)
                     .then(response => {
                         const token = response.data.auth_token
                         userStore.token = token
@@ -90,7 +90,7 @@
                     })
 
                 await axios
-                    .get('http://localhost:8000/api/v1/auth/users/me/')
+                    .get('http://api.pediatrics.or.tz/api/v1/auth/users/me/')
                     .then(response => {
                         // this.$store.commit('setUser', {
                         //     'id': response.data.id,
