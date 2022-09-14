@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         async getmebers() {
-            await axios.get("http://api.pediatrics.or.tz/api/v1/user/").then(response => {
+            await axios.get("http://localhost:8000/api/v1/user/").then(response => {
                 this.member = response.data;
                 console.log(response.data);
             }).catch(error => {
