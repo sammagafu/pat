@@ -1,5 +1,5 @@
 <template>
-  <section class="breadcrumb-header" style="background-image: url(assets/images/header/06_header.jpg)">
+  <section class="breadcrumb-header">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -214,5 +214,8 @@
 
 </template>
 
-<style>
+<style scoped>
+  .breadcrumb-header{
+    background-image: url(../assets/images/header/01_header.jpg)
+  }
 </style>
