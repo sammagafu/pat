@@ -9,7 +9,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['avatar']
 
 class UserSerializer(serializers.ModelSerializer):
-    avatar = UserProfileSerializer(many=True, read_only=True)
+    avatar = UserProfileSerializer(read_only=True)
     class Meta:
         model = User
         fields = ('first_name','last_name',"middlename",

@@ -219,7 +219,7 @@ export default {
                 areaofwork: this.industry,
                 typeofmember: this.typeofmember,
             }
-            axios.post('http://api.pediatrics.or.tz/api/v1/user/', data).
+            axios.post('http://localhost:8000/api/v1/user/', data).
             then(response => {
                 router.push({name: 'login'})
             }).catch(error => {

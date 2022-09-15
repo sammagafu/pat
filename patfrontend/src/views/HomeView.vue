@@ -12,7 +12,6 @@
                   <h1 class="handline">Welcome to The Paediatric Association Of Tanzania</h1>
                   <p class="about-website">We maintain and improve the standards of professional competence and conduct
                     Of All The Members Related To Paediatrics And Child Health.</p>
-                  <a class="btn-1 move-section" href="#start">Let's Start</a>
                   <a class="btn-1 btn-2 ml-30" href="01_department.html">Our Department</a>
                 </div>
               </div>
@@ -48,7 +47,8 @@
               <h4>Login To Your Account</h4>
               <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
                 Account here.</p>
-              <a class="make-appoinment" href="01_appointment.html">Make Appoinment</a>
+                <router-link :to="{name:'login'}" class="make-appoinment">Login to your account</router-link>
+              <!-- <a class="make-appoinment" href="01_appointment.html">Login to your account</a> -->
             </div>
           </div>
         </div>
@@ -68,7 +68,9 @@
               <h4>Become A Member</h4>
               <p>Access your account, the PAT Member Directory, transcripts and more. Already logged in? Find your
                 Account here.</p>
-              <a class="timetable" href="01_doctors-timetable.html">Discover Timetable</a>
+              <!-- <a class="timetable" href="01_doctors-timetable.html">Discover Timetable</a> -->
+              <router-link :to="{name:'register'}" class="make-appoinment">Register Now</router-link>
+
             </div>
           </div>
         </div>

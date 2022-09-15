@@ -21,5 +21,11 @@ export const authStore = defineStore({
     setUser(user) {
       this.user = user
     },
+    logoutUser (){
+      localStorage.removeItem("token");
+      localStorage.removeItem("userid");
+      localStorage.removeItem("email");
+      this.$router.to({name:'login'})
+    }
   }
 })
