@@ -11,4 +11,5 @@ import Footer from './components/Footer.vue';
 </template>
 
 <style>
+  @import url('../src/assets/css/responsive.css');
 </style>

@@ -22,10 +22,11 @@ export const authStore = defineStore({
       this.user = user
     },
     logoutUser (){
+      this.user = null;
       localStorage.removeItem("token");
       localStorage.removeItem("userid");
       localStorage.removeItem("email");
-      this.$router.to({name:'login'})
+      router.push('/account/login')
     }
   }
 })

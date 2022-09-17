@@ -1119,17 +1119,23 @@ p {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
-
+.features .features-item.one::after{
+    content: "\f111";
+}
 .features .features-item.two{
     background-color: #194f90;
 }
-
+.features .features-item.two::after{
+    content: "\f136";
+}
 .features .features-item.three{
     background-color: #13ADE5;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-
+.features .features-item.three::after{
+    content: "\f117";
+}
 .features .features-item .features-icon,
 .features-2 .features-item .features-icon{
     float: left;

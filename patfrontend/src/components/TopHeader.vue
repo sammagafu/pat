@@ -33,13 +33,14 @@
                     <router-link :to="{name:'home'}" class="logo-nav">
                         <img class="img-fluid one" src="../assets/logo.png" alt="01 Logo">
                     </router-link>
-                    <a href="#open-nav-bar-menu" class="open-nav-bar">
+                    <a href="#open-nav-bar-menu" class="open-nav-bar" :class="{'active':tooglevalue}" @click="toogleMenu()">
                         <span></span>
                         <span></span>
                         <span></span>
                     </a>
                 </div>
-                <div class="nav-bar-links" id="open-nav-bar-menu">
+                
+                <div class="nav-bar-links" id="open-nav-bar-menu"  :class="{'active':tooglevalue}">
                     <ul class="level-1">
                         <li class="item-level-1">
                             <router-link :to="{name:'home'}" class="link-level-1">Home</router-link>
@@ -69,11 +70,9 @@
                         </li>
 
                         <li class="item-level-1" v-else>
-                            <a class="link-level-1" href="#" @click="userStore.logoutUser()">Logout</a>
+                            <a class="link-level-1" @click="userStore.logoutUser()">Logout</a>
                             <!-- <router-link :to="{name:'login'}" class="link-level-1">Logout</router-link> -->
                         </li>
-
-
                     </ul>
                 </div>
             </div>
@@ -85,9 +84,33 @@
 .logo-nav>img {
     width: 40% !important;
 }
+a:hover {
+    cursor:pointer;
+}
 </style>
 
-<script setup>
+<script>
+import { ref } from 'vue'
 import { authStore } from "@/stores/usersStore";
-const userStore = authStore()
+
+export default{
+    setup(){
+        const userStore = authStore()
+        return {
+            userStore
+        }
+    },
+    data(){
+        return{
+            tooglevalue : false,
+        }
+    },
+    methods : {
+        toogleMenu (){
+           this.tooglevalue != this.tooglevalue
+           console.log(this.tooglevalue)
+        }
+    }
+
+}
 </script>

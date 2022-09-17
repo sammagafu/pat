@@ -114,7 +114,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     a{
         color: #1A3D7D;
         font-size: 14px;
