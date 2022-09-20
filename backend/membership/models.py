@@ -99,7 +99,7 @@ class User(AbstractUser):
     memberId = models.SlugField(_("Membership Identification"),editable=False,unique=True)
     avatar = models.ImageField(default='default.jpg', upload_to='uploads/profile/')
     collage = models.CharField(_("Collage that you had your masters"), max_length=180)
-    year = models.IntegerField(_("Year that you graduated"),max_length=4)
+    year = models.IntegerField(_("Year that you graduated"))
     
 
 
