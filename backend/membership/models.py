@@ -97,6 +97,9 @@ class User(AbstractUser):
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
     typeofmember = models.CharField(_("Membership type"), max_length=180,choices=TypeOfMember)
     memberId = models.SlugField(_("Membership Identification"),editable=False,unique=True)
+    avatar = models.ImageField(default='default.jpg', upload_to='uploads/profile/')
+    collage = models.CharField(_("Collage that you had your masters"), max_length=180)
+    year = models.IntegerField(_("Year that you graduated"),max_length=4)
     
 
 
@@ -146,18 +149,3 @@ class PaymentDate(models.Model):
     price = models.IntegerField(default=15)
     created = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
     expire = models.DateTimeField(_("Paid at"), auto_now=False, auto_now_add=False)
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name="avatar")
-    avatar = models.ImageField(default='default.jpg', upload_to='uploads/profile/')
-
-    def __str__(self):
-        return self.user.username
-
-
-# @receiver(post_save, sender=User)
-# def create_or_update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#         instance.profile.save()

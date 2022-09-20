@@ -33,14 +33,14 @@
                     <router-link :to="{name:'home'}" class="logo-nav">
                         <img class="img-fluid one" src="../assets/logo.png" alt="01 Logo">
                     </router-link>
-                    <a href="#open-nav-bar-menu" class="open-nav-bar" :class="{'active':tooglevalue}" @click="toogleMenu()">
+                    <a href="#open-nav-bar-menu" class="open-nav-bar" :class="{active:tooglevalue}" @click="toogleMenu()">
                         <span></span>
                         <span></span>
                         <span></span>
                     </a>
                 </div>
                 
-                <div class="nav-bar-links" id="open-nav-bar-menu"  :class="{'active':tooglevalue}">
+                <div class="nav-bar-links" id="open-nav-bar-menu"  :class="{active:tooglevalue}">
                     <ul class="level-1">
                         <li class="item-level-1">
                             <router-link :to="{name:'home'}" class="link-level-1">Home</router-link>
