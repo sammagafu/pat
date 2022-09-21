@@ -5,7 +5,7 @@
                 <div class="col-md-4">
                     <auth-side-bar></auth-side-bar>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" v-if="resources == null">
                     <template v-if="resources">
                         <div class="faq" v-for="(resources,index) in resources" :key="resources.index">
                         <div class="faq-box">
@@ -20,6 +20,11 @@
                         </div>
                     </div>
                     </template>
+                </div>
+                <div class="col-md-8" v-else>
+                    <div class="row">
+                        <h4>No resources for now ! come back later</h4>
+                    </div>
                 </div>
             </div>
         </div>

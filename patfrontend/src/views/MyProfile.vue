@@ -6,6 +6,7 @@
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8">
+                    <img :src="user.avatar" :alt="user.first_name + user.last_name" class="avatar">
                     <h2>My Profile for {{user.first_name}} {{user.last_name}}</h2>
                     <p>Membership ID: {{user.memberId}}</p>
                     <p>Member type: {{user.typeofmember}}</p>
@@ -62,3 +63,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.avatar{
+    margin-bottom: 18px;
+}
+img{
+    width: 200px !important;
+}
+</style>

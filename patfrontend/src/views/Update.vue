@@ -5,7 +5,7 @@
                 <div class="col-lg-4">
                     <AuthSideBar />
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" v-if="update == null">
                     <div class="row">
                         <div class="col-md-6 col-lg-4" v-for="up in update">
                             <div class="blog-item">
@@ -24,6 +24,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-8" v-else>
+                    <div class="row">
+                        <h4>No Updates for now ! come back later</h4>
                     </div>
                 </div>
             </div>

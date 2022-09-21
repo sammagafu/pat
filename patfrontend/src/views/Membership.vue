@@ -114,7 +114,7 @@ body,
 .card {
     padding: 2.5rem 2rem;
     border-radius: 10px;
-    margin-bottom: 1rem;
+    margin: 1.2rem 0;
     background-color: rgba(255, 255, 255, .5);
     box-shadow: 0 0 30px rgba(0, 0, 0, .15);
     position: relative;

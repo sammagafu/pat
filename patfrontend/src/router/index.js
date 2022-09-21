@@ -67,7 +67,7 @@ const router = createRouter({
       path: '/membership',
       meta: {
         requireLogin: true
-      },
+      },  
       children : [
         {
           path: '',
