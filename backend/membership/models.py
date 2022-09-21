@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django_resized import ResizedImageField
+
 
 import random
 
@@ -97,9 +97,9 @@ class User(AbstractUser):
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
     typeofmember = models.CharField(_("Membership type"), max_length=180,choices=TypeOfMember)
     memberId = models.SlugField(_("Membership Identification"),editable=False,unique=True)
-    avatar = models.ImageField(default='default.jpg', upload_to='uploads/profile/')
-    collage = models.CharField(_("Collage that you had your masters"), max_length=180)
-    year = models.IntegerField(_("Year that you graduated"))
+    avatar = ResizedImageField(upload_to = 'product/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
+    collage = models.CharField(_("Collage that you had your masters"), max_length=180,blank=True,null=True)
+    year = models.IntegerField(_("Year that you graduated"),blank=True,null=True)
     
 
 

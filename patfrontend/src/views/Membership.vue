@@ -6,29 +6,27 @@
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8">
-                    <!-- <div class="col-md-12" v-for="member in member" :key="member.id">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img src="../assets/images/avatar.jpg" alt="" class="">
-                            </div>
-                            <div class="col-md-8">
-                                <h2>{{member.first_name}} {{member.middlename}} {{member.last_name}}</h2>
-                                <p>{{member.organization}}</p>
-                                <p>{{member.region}}</p>
-                            </div>
-                        </div>
-                    </div> -->
+                    <div class="form-group">
+                        <label for="filter">Search</label>
+                        <input type="text" name="filter" id="filter" placeholder="Enter users name, email, or mct number" v-model="keyword">
+                    </div>
+                    
                     <div class="card" v-for="me in member" :key="member.id">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2" v-if="me.avatar == 'http://localhost:8000/default.jpg'">
                                 <div class="img">
                                     <img src="../assets/images/avatar.jpg">
+                                </div>
+                            </div>
+                            <div class="col-md-2" v-else>
+                                <div class="img">
+                                    <img :src="me.avatar">
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="infos">
                             <div class="name">
-                                <h2>{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</h2>
+                                <h2 class="userlink"><router-link :to="{name:'userdetails',params:{membershipid:me.memberId}}">{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</router-link></h2>
                                 <h4>{{me.memberId}}</h4>
                             </div>
                             <p class="text">{{me.organization}}</p>
@@ -62,10 +60,20 @@ export default {
     data() {
         return {
             member: [],
+            filteredmembers: [],
+            keyword: '',
         };
     },
     mounted() {
         this.getmebers();
+    },
+    computed : {
+        filteredmembers(){
+            let tempmambers = this.member
+            tempmambers = tempmambers.filter((item) =>{
+                return console.log(item);
+            })
+        }
     },
     methods: {
         async getmebers() {
@@ -182,7 +190,11 @@ body,
 .stats li h4 {
     font-size: .75rem;
 }
-
+h2,a{
+    color: #222;
+    padding-bottom: .5rem;
+    font-weight: 400;
+}
 .links button {
     font-family: 'Poppins', sans-serif;
     min-width: 120px;

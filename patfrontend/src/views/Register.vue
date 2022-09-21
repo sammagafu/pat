@@ -12,18 +12,24 @@
                             <div class="form-group">
                                 <label for="firstname">First Name <span style="color: red">*</span></label>
                                 <input type="text" v-model="firstname" class="form-control" id="firstname">
+                                <span class="text-danger" v-if="msg.firstname">{{msg.firstname}}</span>
+
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="middlename">Middle name <span style="color: red">*</span></label>
                                 <input type="text" v-model="middlename" class="form-control" id="middlename">
+                                <span class="text-danger" v-if="msg.middlename">{{msg.middlename}}</span>
+
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="lastname">Last Name <span style="color: red">*</span></label>
                                 <input type="text" v-model="lastname" class="form-control" id="lastname">
+                                <span class="text-danger" v-if="msg.lastname">{{msg.lastname}}</span>
+
                             </div>
                         </div>
                         <div class="mb-3">
@@ -36,30 +42,31 @@
                             <div class="form-group">
                                 <label for="email">Email <span style="color: red">*</span></label>
                                 <input type="email" v-model="email" class="form-control" id="email">
+                                <span class="text-danger" v-if="msg.email">{{msg.email}}</span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="phonenumber">Phone Number (Start with +255)</label>
                                 <input type="phone" v-model="phonenumber" class="form-control" id="phonenumber">
+                                <span class="text-danger" v-if="msg.phonenumber">{{msg.phonenumber}}</span>
+
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="form-group">
-                                <label for="mct">MCT number (optional)</label>
-                                <input type="text" v-model="mct" class="form-control" id="mct">
-                            </div>
-                        </div>
+
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" v-model="password" class="form-control" id="password">
+                                <span v-if="msg.password">{{msg.password}}</span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="confirmpass">Confrim Password</label>
                                 <input type="password" v-model="repassword" class="form-control" id="confirmpass">
+                                <span v-if="msg.repassword">{{msg.repassword}}</span>
+
                             </div>
                         </div>
 
@@ -111,7 +118,7 @@
                         <div class="mb-3">
                             <label>Please select the profession that most closely represents you <span
                                     style="color: red">*</span></label>
-                            <select class="form-control" name="profession">
+                            <select class="form-control" name="profession" v-model="profession">
                                 <option value="Administrator">Administrator</option>
                                 <option value="Community health worker">ommunity health worker</option>
                                 <option value="First responder such as EMT or Paramedic">First responder such as EMT or
@@ -165,6 +172,31 @@
                             </div>
                         </div>
 
+                        <!-- <template v-if="typeofmember == Ordinary Member">
+                        </template> -->
+                        <span v-if="typeofmember == 'Ordinary Member'">
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="mct">MCT number (optional)</label>
+                                    <input type="text" v-model="mct" class="form-control" id="mct" placeholder="192000">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="masters">Enter the year that you graduated for masters</label>
+                                    <input type="text" v-model="year" class="form-control" id="year" placeholder="2007">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="graduated">Enter the Institute attended</label>
+                                    <input type="text" v-model="masters" class="form-control" id="graduated" placeholder="Muhimbili university of health and allied Sciences">
+                                </div>
+                            </div>
+
+                        </span>
 
                         <button class="btn btn-primary btn-user mt-4 btn-block">
                             Register To PAT
@@ -178,6 +210,7 @@
 </template>
 
 <script>
+// import { computed } from '@vue/reactivity';
 import axios from 'axios';
 import router from '../router';
 
@@ -189,7 +222,7 @@ export default {
             lastname: '',
             username: '',
             email: '',
-            mct: 0,
+            mct: '',
             password: '',
             repassword: '',
             gender: 'Female',
@@ -199,6 +232,12 @@ export default {
             organization: '',
             industry: 'Hospital',
             typeofmember: 'Associate Member',
+            graduation: '',
+            masters: '',
+            year : '',
+            avatar: null,
+            msg: [],
+            isDisabled:true
         }
     },
     methods: {
@@ -220,11 +259,105 @@ export default {
                 typeofmember: this.typeofmember,
             }
             axios.post('http://localhost:8000/api/v1/user/', data).
-            then(response => {
-                router.push({name: 'login'})
-            }).catch(error => {
-                console.log(error)
-            })
+                then(response => {
+                    router.push({ name: 'login' })
+                }).catch(error => {
+                    console.log(error)
+                })
+        },
+        validateEmail(value) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+                this.msg['email'] = '';
+            } else {
+                this.msg['email'] = 'Invalid Email Address';
+                // this.disabled = [true, this.disabled[1]]
+            }
+        },
+
+        validateFirstname(value) {
+            if (/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(value)) {
+                this.msg['firstname'] = "";
+            } else {
+                this.msg['firstname'] = 'Invalid First name';
+            }
+        },
+        validateLastname(value) {
+            if (/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(value)) {
+                this.msg['lastname'] = "";
+            } else {
+                this.msg['lastname'] = 'Invalid Last name';
+            }
+        },
+        validateMiddlename(value) {
+            if (/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(value)) {
+                this.msg['middlename'] = "";
+            } else {
+                this.msg['middlename'] = 'Invalid Middle name';
+            }
+        },
+        validatePhoneNumber(value) {
+            if (value.len < 10) {
+                this.msg['phonenumber'] = 'Invalid phone number';
+            }
+            else if (/^[+]?[\s./0-9]*[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/.test(value)) {
+                this.msg['phonenumber'] = "";
+            }
+            else {
+                this.msg['phonenumber'] = 'Invalid phone number';
+            }
+        },
+        validatePassword(value) {
+            let difference = 8 - value.length;
+            if (value.length < 8) {
+                this.msg['password'] = 'Must be 8 characters! ' + difference + ' characters left';
+                // this.disabled = [this.disabled[1], true]
+            } else {
+                this.msg['password'] = '';
+                // this.disabled = [this.disabled[1], false]
+            }
+        },
+        validateRePassword(value) {
+            if (value != this.password) {
+                this.msg['repassword'] = "Passwords don't match";
+            } else {
+                this.msg['repassword'] = ''
+            }
+        },
+        validateProffesion(value) {
+            if (value == "Paediatrician") {
+                this.typeofmember == "Ordinary Member"
+            }
+        }
+
+    },
+    watch: {
+        email(value) {
+            this.validateEmail(value);
+        },
+
+        firstname(value) {
+            this.validateFirstname(value)
+
+        },
+        middlename(value) {
+            this.validateMiddlename(value)
+
+        },
+        lastname(value) {
+            this.validateLastname(value)
+
+        },
+        phonenumber(value) {
+            this.validatePhoneNumber(value)
+        },
+        password(value) {
+            this.validatePassword(value)
+        },
+        repassword(value) {
+            this.validateRePassword(value)
+        },
+        profession(value) {
+            this.validateProffesion(value)
         },
     }
 }

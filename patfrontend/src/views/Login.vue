@@ -107,7 +107,7 @@
                         console.log(error)
                     })
 
-                    const toPath = this.$route.query.to || '/membership'
+                    const toPath = this.$route.query.to || '/resource'
                     this.$router.push(toPath)
             }
         }

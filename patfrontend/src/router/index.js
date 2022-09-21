@@ -65,13 +65,21 @@ const router = createRouter({
     },
     {
       path: '/membership',
-      name: 'membership',
       meta: {
         requireLogin: true
       },
-      component: () => import('../views/Membership.vue'),
       children : [
+        {
+          path: '',
+          name: 'membership',
+          component: () => import('../views/Membership.vue'),
 
+        },
+        {
+          path:':membershipid',
+          name:'userdetails',
+          component : () => import ('../views/Userdetail.vue')
+        }
       ]
     },
     {

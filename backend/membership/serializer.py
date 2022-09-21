@@ -9,6 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('first_name','last_name',"middlename",
         'username','email','phone_number','avatar',
         'mctnumber','gender','region','organization'
-        ,'profession','areaofwork','typeofmember','memberId','avatar','collage','year')
+        ,'profession','areaofwork','typeofmember','memberId','collage','year')
         write_only_fields = ['password']
 

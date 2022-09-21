@@ -26,6 +26,17 @@
 
         <div class="widget">
             <div class="widget-title">
+                <h3>Members</h3>
+            </div>
+            <div class="widget-body">
+                <ul class="single-department-list">
+                    <li><router-link :to="{name:'membership'}" class="link-level-1">Members List <i class="fas fa-angle-right"></i> </router-link></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="widget">
+            <div class="widget-title">
                 <h3>My Profile</h3>
             </div>
             <div class="widget-body">
@@ -35,5 +46,6 @@
                 </ul>
             </div>
         </div>
+
     </div>
 </template>
