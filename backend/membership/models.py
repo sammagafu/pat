@@ -87,10 +87,10 @@ class User(AbstractUser):
     ]
     
     middlename = models.CharField(_("Middle Name"), max_length=50)
-    mctnumber = models.CharField(_("MCT Number"), max_length=50,unique=True,blank=True)
+    mctnumber = models.CharField(_("MCT Number"), max_length=50,blank=True,null=True)
     gender = models.CharField(_("Gender"), max_length=8,choices=GENDER)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True,unique=True) # Validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], max_length=17,unique=True) # Validators should be a list
     region = models.CharField(_("Region"), max_length=50,choices=REGION)
     organization = models.CharField(_("Your Organization"), max_length=180)
     profession = models.CharField(_("Your Profession"), max_length=180,choices=Proffesion)

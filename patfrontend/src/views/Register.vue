@@ -4,7 +4,7 @@
             <h2>Welcome Please Register</h2>
         </div>
         <div class="container add-comments">
-            <form class="inner-add-comments form-contact-1" @submit.prevent="registerUser" id="registration-form">
+            <form class="inner-add-comments form-contact-1" id="registration-form" @submit.prevent="registerUser">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
 
@@ -281,7 +281,6 @@ export default {
                     console.log(error)
                 })
         },
-
         validateEmail(value) {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
                 this.msg['email'] = '';
