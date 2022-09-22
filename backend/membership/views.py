@@ -13,7 +13,7 @@ class UsersList(generics.ListCreateAPIView):
         instance.set_password(instance.password)
         instance.save()
 
-class UserDetailView(generics.RetrieveAPIView):
+class UserDetailView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

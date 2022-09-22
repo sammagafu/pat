@@ -87,7 +87,7 @@ class User(AbstractUser):
     ]
     
     middlename = models.CharField(_("Middle Name"), max_length=50)
-    mctnumber = models.CharField(_("MCT Number"), max_length=50,unique=True)
+    mctnumber = models.CharField(_("MCT Number"), max_length=50,unique=True,blank=True)
     gender = models.CharField(_("Gender"), max_length=8,choices=GENDER)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True,unique=True) # Validators should be a list
@@ -97,7 +97,7 @@ class User(AbstractUser):
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
     typeofmember = models.CharField(_("Membership type"), max_length=180,choices=TypeOfMember)
     memberId = models.SlugField(_("Membership Identification"),editable=False,unique=True)
-    avatar = ResizedImageField(upload_to = 'product/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
+    avatar = ResizedImageField(upload_to = 'profile/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
     collage = models.CharField(_("Collage that you had your masters"), max_length=180,blank=True,null=True)
     year = models.IntegerField(_("Year that you graduated"),blank=True,null=True)
     
