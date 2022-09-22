@@ -172,6 +172,14 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label class="control-label" for="avatar">Avatar (Add your passport for your ID or you can update later)</label>
+                                <br>
+                                <input type="file" name="image" id="avatar" placeholder="passport image for your avatar" @change="onFileUpload" ref="avatar">
+                            </div>
+                        </div>
+
                         <!-- <template v-if="typeofmember == Ordinary Member">
                         </template> -->
                         <span v-if="typeofmember == 'Ordinary Member'">
@@ -241,24 +249,50 @@ export default {
         }
     },
     methods: {
+        onFileUpload (event) {
+          this.avatar = event.target.files[0]
+          console.log(this.avatar);
+        },
+
         async registerUser() {
-            const data = {
-                first_name: this.firstname,
-                middlename: this.middlename,
-                last_name: this.lastname,
-                username: this.username,
-                email: this.email,
-                phone_number: this.phonenumber,
-                password: this.password,
-                mctnumber: this.mct,
-                gender: this.gender,
-                region: this.region,
-                profession: this.profession,
-                organization: this.organization,
-                areaofwork: this.industry,
-                typeofmember: this.typeofmember,
-            }
-            axios.post('http://localhost:8000/api/v1/user/', data).
+            const headers = { 'Content-Type': 'multipart/form-data' };
+            let formData = new FormData()
+            formData.append('avatar', this.avatar)
+            formData.append('first_name', this.firstname)
+            formData.append('middlename', this.middlename)
+            formData.append('last_name', this.lastname)
+            formData.append('username', this.username)
+            formData.append('email', this.email)
+            formData.append('phone_number', this.phonenumber)
+            formData.append('password', this.password)
+            formData.append('mctnumber', this.mct)
+            formData.append('gender', this.gender)
+            formData.append('region', this.region)
+            formData.append('profession', this.profession)
+            formData.append('organization', this.organization)
+            formData.append('areaofwork', this.industry)
+            formData.append('typeofmember', this.typeofmember)
+            console.log(formData);
+
+            // const data = {
+            //     first_name: this.firstname,
+            //     middlename: this.middlename,
+            //     last_name: this.lastname,
+            //     username: this.username,
+            //     email: this.email,
+            //     phone_number: this.phonenumber,
+            //     password: this.password,
+            //     mctnumber: this.mct,
+            //     gender: this.gender,
+            //     region: this.region,
+            //     profession: this.profession,
+            //     organization: this.organization,
+            //     areaofwork: this.industry,
+            //     typeofmember: this.typeofmember,
+            // }
+            // data.avatar = this.FILE;
+            // console.log(data);
+            axios.post('http://localhost:8000/api/v1/user/', formData, { headers }).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {
