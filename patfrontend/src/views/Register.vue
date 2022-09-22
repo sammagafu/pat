@@ -4,7 +4,7 @@
             <h2>Welcome Please Register</h2>
         </div>
         <div class="container add-comments">
-            <form class="inner-add-comments form-contact-1" @submit.prevent="registerUser">
+            <form class="inner-add-comments form-contact-1" @submit.prevent="registerUser" id="registration-form">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
 
@@ -255,50 +255,33 @@ export default {
         },
 
         async registerUser() {
+            const form = document.querySelector("#registration-form")
+            const fdata  = new FormData(form);
             const headers = { 'Content-Type': 'multipart/form-data' };
-            let formData = new FormData()
-            formData.append('avatar', this.avatar)
-            formData.append('first_name', this.firstname)
-            formData.append('middlename', this.middlename)
-            formData.append('last_name', this.lastname)
-            formData.append('username', this.username)
-            formData.append('email', this.email)
-            formData.append('phone_number', this.phonenumber)
-            formData.append('password', this.password)
-            formData.append('mctnumber', this.mct)
-            formData.append('gender', this.gender)
-            formData.append('region', this.region)
-            formData.append('profession', this.profession)
-            formData.append('organization', this.organization)
-            formData.append('areaofwork', this.industry)
-            formData.append('typeofmember', this.typeofmember)
-            console.log(formData);
-
-            // const data = {
-            //     first_name: this.firstname,
-            //     middlename: this.middlename,
-            //     last_name: this.lastname,
-            //     username: this.username,
-            //     email: this.email,
-            //     phone_number: this.phonenumber,
-            //     password: this.password,
-            //     mctnumber: this.mct,
-            //     gender: this.gender,
-            //     region: this.region,
-            //     profession: this.profession,
-            //     organization: this.organization,
-            //     areaofwork: this.industry,
-            //     typeofmember: this.typeofmember,
-            // }
-            // data.avatar = this.FILE;
-            // console.log(data);
-            axios.post('http://localhost:8000/api/v1/user/', formData, { headers }).
+            fdata.append('avatar', this.avatar)
+            fdata.append('first_name', this.firstname)
+            fdata.append('middlename', this.middlename)
+            fdata.append('last_name', this.lastname)
+            fdata.append('username', this.username)
+            fdata.append('email', this.email)
+            fdata.append('phone_number', this.phonenumber)
+            fdata.append('password', this.password)
+            fdata.append('mctnumber', this.mct)
+            fdata.append('gender', this.gender)
+            fdata.append('region', this.region)
+            fdata.append('profession', this.profession)
+            fdata.append('organization', this.organization)
+            fdata.append('areaofwork', this.industry)
+            fdata.append('typeofmember', this.typeofmember)
+            console.log(fdata);
+            axios.post('http://localhost:8000/api/v1/user/', fdata, { headers }).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {
                     console.log(error)
                 })
         },
+
         validateEmail(value) {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
                 this.msg['email'] = '';
