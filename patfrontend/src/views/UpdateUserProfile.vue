@@ -45,7 +45,7 @@ export default {
         
         // function onUnmounted(callback: () => void): void
         onMounted(() => {
-            axios.put(`http://localhost:8000/api/v1/user/${authdata.user.id}`)
+            axios.put(`http://api.pediatrics.or.tz/${authdata.user.id}`)
                 .then(response => {
                     console.log(response.data)
                     user.value = response.data

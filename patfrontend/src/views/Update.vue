@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         getResources() {
-            axios.get("http://localhost:8000/api/v1/update/")
+            axios.get("http://api.pediatrics.or.tz/api/v1/update/")
                 .then(response => {
                     this.update = response.data;
                     console.log(this.update)
