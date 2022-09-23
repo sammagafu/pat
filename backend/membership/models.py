@@ -107,7 +107,7 @@ class User(AbstractUser):
         return self.username
 
     def get_avatar(self):
-        if self.coverImage:
+        if self.avatar:
             return 'http://api.pediatrics.or.tz' + self.avatar.url
         return ''
 
