@@ -9,4 +9,4 @@ class ResourceCategory(serializers.ModelSerializer):
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
-        fields = ['id','title', 'file','description','published', 'category', 'created']
+        fields = ['id','title', 'file','description','published', 'category', 'created','get_file']

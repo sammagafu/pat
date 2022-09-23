@@ -33,6 +33,11 @@ class Project(models.Model):
     def __str__(self):
         return self.projectname
 
+    def get_cover(self):
+        if self.cover:
+            return 'http://api.pediatrics.or.tz' + self.cover.url
+        return ''
+
     def save(self):
         if not self.slug:
             self.slug = slugify(self.projectname)

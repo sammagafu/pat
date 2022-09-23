@@ -3,6 +3,7 @@
         <div class="text-center mb-4">
             <h2>Welcome Please Register</h2>
         </div>
+        {{err}}
         <div class="container add-comments">
             <form class="inner-add-comments form-contact-1" id="registration-form" @submit.prevent="registerUser">
                 <div class="row">
@@ -11,23 +12,25 @@
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="firstname">First Name <span style="color: red">*</span></label>
-                                <input type="text" v-model="firstname" class="form-control" id="firstname">
+                                <input type="text" v-model="firstname" class="form-control" id="firstname" required>
                                 <span class="text-danger" v-if="msg.firstname">{{msg.firstname}}</span>
+                                <span class="text-danger" v-if="err[first_name]">{{err[first_name]}}</span>
 
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="middlename">Middle name <span style="color: red">*</span></label>
-                                <input type="text" v-model="middlename" class="form-control" id="middlename">
+                                <input type="text" v-model="middlename" class="form-control" id="middlename" required>
                                 <span class="text-danger" v-if="msg.middlename">{{msg.middlename}}</span>
+                                <span class="text-danger" v-if="err.middlename">{{err[middlename]}}</span>
 
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="lastname">Last Name <span style="color: red">*</span></label>
-                                <input type="text" v-model="lastname" class="form-control" id="lastname">
+                                <input type="text" v-model="lastname" class="form-control" id="lastname" required>
                                 <span class="text-danger" v-if="msg.lastname">{{msg.lastname}}</span>
 
                             </div>
@@ -35,20 +38,20 @@
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="username">Username <span style="color: red">*</span></label>
-                                <input type="text" v-model="username" class="form-control" id="username">
+                                <input type="text" v-model="username" class="form-control" id="username" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="email">Email <span style="color: red">*</span></label>
-                                <input type="email" v-model="email" class="form-control" id="email">
+                                <input type="email" v-model="email" class="form-control" id="email" required>
                                 <span class="text-danger" v-if="msg.email">{{msg.email}}</span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="phonenumber">Phone Number (Start with +255)</label>
-                                <input type="phone" v-model="phonenumber" class="form-control" id="phonenumber">
+                                <input type="phone" v-model="phonenumber" class="form-control" id="phonenumber" required>
                                 <span class="text-danger" v-if="msg.phonenumber">{{msg.phonenumber}}</span>
 
                             </div>
@@ -57,14 +60,14 @@
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" v-model="password" class="form-control" id="password">
+                                <input type="password" v-model="password" class="form-control" id="password" required>
                                 <span v-if="msg.password">{{msg.password}}</span>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="confirmpass">Confrim Password</label>
-                                <input type="password" v-model="repassword" class="form-control" id="confirmpass">
+                                <input type="password" v-model="repassword" class="form-control" id="confirmpass" required>
                                 <span v-if="msg.repassword">{{msg.repassword}}</span>
 
                             </div>
@@ -143,7 +146,7 @@
                         <div class="mb-3">
                             <label>Your organization Name<span style="color: red">*</span></label>
                             <input type="text" v-model="organization" class="form-control"
-                                placeholder="Bugando Medical Center">
+                                placeholder="Bugando Medical Center" required>
                         </div>
 
                         <div class="mb-3">
@@ -221,8 +224,15 @@
 // import { computed } from '@vue/reactivity';
 import axios from 'axios';
 import router from '../router';
+import { authStore } from '../stores/usersStore';
 
 export default {
+    setup(){
+        const authdata = authStore();
+        return {
+            authdata
+        }
+    },
     data() {
         return {
             firstname: '',
@@ -245,6 +255,7 @@ export default {
             year : '',
             avatar: null,
             msg: [],
+            err : [],
             isDisabled:true
         }
     },
@@ -255,6 +266,7 @@ export default {
         },
 
         async registerUser() {
+            this.authdata.isLoading = true
             const form = document.querySelector("#registration-form")
             const fdata  = new FormData(form);
             const headers = { 'Content-Type': 'multipart/form-data' };
@@ -278,8 +290,10 @@ export default {
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {
+                    this.err = error.response.data.
                     console.log(error)
                 })
+                this.authdata.isLoading = false
         },
         validateEmail(value) {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
@@ -378,3 +392,17 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    ::-webkit-input-placeholder { /* Edge */
+  color: rgba(0, 0, 0, 0.2);
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(0, 0, 0, 0.2);
+}
+
+::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+</style>

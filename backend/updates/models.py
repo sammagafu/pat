@@ -12,6 +12,7 @@ class Updates(models.Model):
     content = models.TextField()
     created = models.DateTimeField(_("Created at"), auto_now=True,)
     downloads = models.IntegerField(_("Number Of Views"),default=0,editable=False)
+    membersonly = models.BooleanField(_("Members only"),default=False)
 
     class Meta:
         verbose_name = _("Updates")
@@ -19,6 +20,11 @@ class Updates(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_cover(self):
+        if self.cover:
+            return 'http://api.pediatrics.or.tz' + self.cover.url
+        return ''
 
     def save(self):
         if not self.slug:

@@ -35,6 +35,11 @@ class Resource(models.Model):
     def __str__(self):
         return self.title
 
+    def get_file(self):
+        if self.file:
+            return 'http://api.pediatrics.or.tz' + self.file.url
+        return ''
+
     def save(self):
         if not self.slug:
             self.slug = slugify(self.title)

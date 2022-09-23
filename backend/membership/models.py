@@ -106,6 +106,11 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    def get_avatar(self):
+        if self.coverImage:
+            return 'http://api.pediatrics.or.tz' + self.avatar.url
+        return ''
+
     def save(self,*args, **kwargs):
         if self.typeofmember == "Associate Member":
             self.memberId = "pat-am-"+ str(random.randint(0, 1000))

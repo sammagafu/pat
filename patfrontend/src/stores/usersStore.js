@@ -5,6 +5,7 @@ export const authStore = defineStore({
   
   state: () => ({
     isAuthenticated: false,
+    isLoading: false,
     token: JSON.parse(localStorage.getItem('token')),
     user: {
       id: localStorage.getItem('userid'),

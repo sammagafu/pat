@@ -8,6 +8,10 @@
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         <form @submit.prevent="login">
                             <!-- Email input -->
+                            <div class="alert alert-danger" role="alert" v-if="message">
+                                {{message.detail}}
+                            </div>
+                            
                             <div class="form-group mb-4">
                                 <label class="form-label" for="loginName">Email or username</label>
                                 <input type="email" id="loginName" class="form-control" v-model="email"/>
@@ -26,8 +30,7 @@
                                     <!-- Checkbox -->
                                     <div class="form-check mb-3 mb-md-0">
                                         <label class="form-check-label" for="loginCheck"> Remember me </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="loginCheck"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" v-model="rememberme" id="loginCheck" />
                                         
                                     </div>
                                 </div>
@@ -63,7 +66,8 @@
             return {
                 email : '',
                 password : '',
-                rememberme : true
+                rememberme : false,
+                message : ''
             }
         },
         computed(){
@@ -104,7 +108,8 @@
                         localStorage.setItem('userid', response.data.id)
                     })
                     .catch(error => {
-                        console.log(error)
+                        console.log(error.response.data)
+                        this.message = error.response.data
                     })
 
                     const toPath = this.$route.query.to || '/resource'

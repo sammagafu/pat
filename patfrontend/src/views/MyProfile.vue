@@ -46,7 +46,7 @@ export default {
         let user = ref([])
         // function onUnmounted(callback: () => void): void
         onMounted(() => {
-            axios.get(`http://api.pediatrics.or.tz/${authdata.user.id}`)
+            axios.get(`http://api.pediatrics.or.tz/api/v1/user/${authdata.user.id}`)
                 .then(response => {
                     user.value = response.data;
                     console.log(response.data)
