@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 
+
 export const authStore = defineStore({
   id: 'userauth',
   
@@ -24,10 +25,11 @@ export const authStore = defineStore({
     },
     logoutUser (){
       this.user = null;
+      this.isAuthenticated = false
       localStorage.removeItem("token");
       localStorage.removeItem("userid");
       localStorage.removeItem("email");
-      router.push('/account/login')
+      this.$router.push('/account/login')
     }
   }
 })
