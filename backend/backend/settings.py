@@ -139,6 +139,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     "https://www.pediatrics.or.tz/",
+    "https://pediatrics.or.tz/",
+    "https://api.pediatrics.or.tz/",
+    "http://api.pediatrics.or.tz/",
     "http://localhost:8000/",
     "http://localhost:5173",
 ]
