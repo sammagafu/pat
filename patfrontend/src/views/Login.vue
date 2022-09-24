@@ -74,8 +74,6 @@
         },
         methods : {
             async login (){
-                axios.defaults.headers.common["Authorization"] = "";
-                axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*"
                 localStorage.removeItem("token")
 
                 const loginData = {
