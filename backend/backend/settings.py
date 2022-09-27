@@ -79,12 +79,6 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -92,16 +86,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-DATABASES = {
+if not DEBUG:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pat',
-        'USER': 'pat',
-        'PASSWORD': 'Pedi@trics-2020',
+        'NAME': 'ashaworld',
+        'USER': 'ashaworld',
+        'PASSWORD': 'BlackFinge@20',
         'HOST': 'localhost',
         'PORT': '',
          }
     }
+else:
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 
@@ -161,11 +164,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# all auth setting
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED=True
-
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
     # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
@@ -179,11 +177,13 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'LOGIN_FIELD': 'email'
+    # 
+    'SERIALIZERS': {
+        'user_create': 'membership.serializer.UserSerializerCreate',
+        'user': 'membership.serializer.UserSerializer',
+        },
+    
+
 }
 
 AUTH_USER_MODEL = 'membership.User'
-
-{
-    'user': 'membership.serializers.UserSerializer',
-}
