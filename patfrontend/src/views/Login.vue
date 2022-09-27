@@ -13,8 +13,8 @@
                             </div>
                             
                             <div class="form-group mb-4">
-                                <label class="form-label" for="loginName">Email or username</label>
-                                <input type="email" id="loginName" class="form-control" v-model="email"/>
+                                <label class="form-label" for="loginName">Email Address</label>
+                                <input type="text" id="loginName" class="form-control" v-model="email"/>
                                 
                             </div>
 
@@ -81,7 +81,7 @@
                     password: this.password
                 }
 
-                await axios.post('http://api.pediatrics.or.tz/api/v1/auth/token/login/', loginData)
+                await axios.post('http://localhost:8000/api/v1/auth/token/login/', loginData)
                     .then(response => {
                         const token = response.data.auth_token
                         userStore.token = token
@@ -93,7 +93,7 @@
                     })
 
                 await axios
-                    .get('http://api.pediatrics.or.tz/api/v1/auth/users/me/')
+                    .get('http://localhost:8000/api/v1/auth/users/me/')
                     .then(response => {
                         // this.$store.commit('setUser', {
                         //     'id': response.data.id,

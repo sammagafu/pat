@@ -37,12 +37,6 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
-                                <label for="username">Username <span style="color: red">*</span></label>
-                                <input type="text" v-model="username" class="form-control" id="username" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-group">
                                 <label for="email">Email <span style="color: red">*</span></label>
                                 <input type="email" v-model="email" class="form-control" id="email" required>
                                 <span class="text-danger" v-if="msg.email">{{msg.email}}</span>
@@ -238,7 +232,6 @@ export default {
             firstname: '',
             middlename: '',
             lastname: '',
-            username: '',
             email: '',
             mct: '',
             password: '',
@@ -286,7 +279,8 @@ export default {
             fdata.append('areaofwork', this.industry)
             fdata.append('typeofmember', this.typeofmember)
             console.log(fdata);
-            axios.post('http://api.pediatrics.or.tz/api/v1/user/', fdata, { headers }).
+            axios.post('http://localhost:8000/api/v1/user/', fdata, { headers }).
+            // http://localhost:8000/api/v1/
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {

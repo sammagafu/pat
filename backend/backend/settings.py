@@ -126,6 +126,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+   "django.contrib.auth.backends.ModelBackend",
+   "allauth.account.auth_backends.AuthenticationBackend"
+)
 
 CORS_ALLOWED_ORIGINS = [
     "https://www.pediatrics.or.tz/",
@@ -166,7 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 
     "DEFAULT_PARSER_CLASSES": (
@@ -181,6 +185,7 @@ DJOSER = {
     'SERIALIZERS': {
         'user_create': 'membership.serializer.UserSerializerCreate',
         'current_user' : 'membership.serializer.UserSerializer',
+        'user' : 'membership.serializer.UserSerializer',
         },
     
 
