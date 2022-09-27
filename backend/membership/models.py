@@ -82,10 +82,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-    def get_avatar(self):
-        if self.avatar:
-            return 'http://api.pediatrics.or.tz' + self.avatar.url
-        return ''
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Ordinary Member":
@@ -194,6 +190,11 @@ class Profile(models.Model):
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email
+
+    def get_avatar(self):
+        if self.avatar:
+            return 'http://api.pediatrics.or.tz' + self.avatar.url
+        return ''
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):

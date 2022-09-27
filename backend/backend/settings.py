@@ -180,7 +180,7 @@ DJOSER = {
     # 
     'SERIALIZERS': {
         'user_create': 'membership.serializer.UserSerializerCreate',
-        'user': 'membership.serializer.UserSerializer',
+        'current_user' : 'membership.serializer.UserSerializer',
         },
     
 
