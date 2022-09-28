@@ -8,16 +8,17 @@ from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateS
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     class Meta:
         model = Profile
-        fields = ['gender','region','organization','profession','areaofwork','mctnumber','collage','year']
+        fields = ['user','gender','region','organization','profession','areaofwork','mctnumber','collage','year']
         write_only_fields = 'avatar',
         read_only = 'get_avatar'
 
-class UserSerializer(BaseUserCreateSerializer):
+class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer()
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ('first_name','last_name',"middle_name",'email','phone','memberId','typeofmember','profile')
+        fields = ['first_name','last_name',"middle_name",'email','phone','memberId','typeofmember','profile']
         write_only_fields = ['password']
 
 class UserSerializerCreate(BaseUserCreateSerializer):

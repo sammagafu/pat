@@ -196,11 +196,20 @@ class Profile(models.Model):
             return 'http://api.pediatrics.or.tz' + self.avatar.url
         return ''
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+# @receiver(post_save, sender=User)
+# def create_or_update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()
 
 
 # end of users profile

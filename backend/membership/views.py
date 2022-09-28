@@ -1,7 +1,7 @@
 import email
-from rest_framework import generics
+from rest_framework import generics, viewsets, mixins
 from . models import User,Profile
-from .serializer import UserProfileSerializer
+from .serializer import UserProfileSerializer, UserSerializer
 from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
@@ -31,3 +31,23 @@ class ProfileUpdate(APIView):
 
 #      serializer = UserProfileSerializer(company)
 #      return Response(serializer.data)
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+
+    """
+    queryset = Profile.objects.all()
+    serializer_class = UserProfileSerializer
+    http_method_names = ['get','post','retrieve','put','patch']
+
+    class UserViewSet(viewsets.ModelViewSet):
+        """
+        This viewset automatically provides `list`, `create`, `retrieve`,
+        `update` and `destroy` actions.
+
+        """
+        queryset = User.objects.all()
+        serializer_class = UserSerializer
+        http_method_names = ['get','post','retrieve','put','patch']
