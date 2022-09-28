@@ -170,7 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 
     "DEFAULT_PARSER_CLASSES": (
@@ -181,7 +181,7 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    # 
+    'user_create': ['rest_framework.permissions.AllowAny'],
     'SERIALIZERS': {
         'user_create': 'membership.serializer.UserSerializerCreate',
         'current_user' : 'membership.serializer.UserSerializer',
