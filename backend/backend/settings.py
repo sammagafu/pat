@@ -135,6 +135,7 @@ AUTHENTICATION_BACKENDS = (
 CORS_ALLOWED_ORIGINS = [
     "https://www.pediatrics.or.tz",
     "http://www.pediatrics.or.tz",
+    :"http://pediatrics.or.tz",
     "https://pediatrics.or.tz",
     "https://api.pediatrics.or.tz",
     "http://api.pediatrics.or.tz",
