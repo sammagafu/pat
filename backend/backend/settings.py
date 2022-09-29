@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9ek0)i9t9@blgd^*10e$s!9!tqh&+#j^r%+dod*ct)g#g^w1n7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -92,9 +92,9 @@ if not DEBUG:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ashaworld',
-        'USER': 'ashaworld',
-        'PASSWORD': 'BlackFinge@20',
+        'NAME': 'pat',
+        'USER': 'pat',
+        'PASSWORD': 'Pedi@trics-2020',
         'HOST': 'localhost',
         'PORT': '',
          }
@@ -159,7 +159,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles/'
 
 MEDIA_ROOT = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
