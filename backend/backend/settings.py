@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'updates',
     'membership',
     'djoser',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     # editor
@@ -57,7 +58,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
+
+    "corsheaders.middleware.CorsPostCsrfMiddleware"
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -128,15 +130,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
-   "allauth.account.auth_backends.AuthenticationBackend"
 )
 
 CORS_ALLOWED_ORIGINS = [
-    "https://www.pediatrics.or.tz/",
-    "https://pediatrics.or.tz/",
-    "https://api.pediatrics.or.tz/",
-    "http://api.pediatrics.or.tz/",
-    "http://localhost:8000/",
+    "https://www.pediatrics.or.tz",
+    "https://pediatrics.or.tz",
+    "https://api.pediatrics.or.tz",
+    "http://api.pediatrics.or.tz",
+    "http://localhost:8000",
     "http://localhost:5173",
 ]
 
@@ -185,6 +186,8 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'user_create': ['rest_framework.permissions.AllowAny'],
+    # 'user_list': ['rest_framework.permissions.AllowAny'],
+    'user': ['rest_framework.permissions.AllowAny'],
     'SERIALIZERS': {
         'user_create': 'membership.serializer.UserSerializerCreate',
         'current_user' : 'membership.serializer.UserSerializer',

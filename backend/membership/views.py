@@ -8,25 +8,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-# # class SpecificUserView(generics.RetrieveAPIView):
-# #     queryset = Profile.objects.all()
-# #     serializer_class = UserProfileSerializer
-# #     lookup_field = 'memberId'
-
-# class ProfileUpdate(APIView):
-#     def post(self, request):
-#         userdata = User.objects.filter(email=self.request.data.get('email')).get()
-#         userprofile = User.objects.filter(user=userdata.pk).get()
-
-
-# # @api_view(['POST'])
-# # def get_my_team(request):
-# #      # print("request")
-# #      member = Team.objects.filter(teammember__pk=request.user.id).get()
-# #      company = CompanyInformation.objects.filter(team__pk=member.pk).get()
-
-# #      serializer = UserProfileSerializer(company)
-# #      return Response(serializer.data)
+class SpecificUserView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'memberId'
 
 class ProfileViewSet(viewsets.ModelViewSet):
     """

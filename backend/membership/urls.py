@@ -13,5 +13,5 @@ urlpatterns = [
     # path('profile/',include(profilerouter.urls)),
     # path('profile/',views.ProfileUpdate.as_view()),
     # path('<int:pk>',views.UserDetailView.as_view()),
-    # path('<str:memberId>',views.SpecificUserView.as_view())
+    path('<str:memberId>',views.SpecificUserView.as_view())
 ]
