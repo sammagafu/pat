@@ -172,6 +172,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def get_avatar(self):
+        if self.avatar:
+            return 'http://api.pediatrics.or.tz' + self.avatar.url
+        return ''
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Ordinary Member":
