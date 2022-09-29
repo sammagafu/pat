@@ -1,27 +1,15 @@
 from dataclasses import fields
 from statistics import mode
 from rest_framework import serializers
-from . models import User,Profile
+from . models import User
 
 from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserCreateSerializer
 
-
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    class Meta:
-        model = Profile
-        fields = ['user','gender','region','organization','profession','areaofwork','mctnumber','collage','year']
-        write_only_fields = 'avatar',
-        read_only = 'get_avatar'
-
 class UserSerializer(serializers.ModelSerializer):
-    profile = UserProfileSerializer()
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ['first_name','last_name',"middle_name",'email','phone','memberId','typeofmember','profile']
+        fields = ['first_name','last_name',"middle_name",'email','phone','memberId','typeofmember']
         write_only_fields = ['password']
 
 class UserSerializerCreate(BaseUserCreateSerializer):
-    profile = UserProfileSerializer(read_only=True)
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ('first_name','last_name',"middle_name",'email','phone','typeofmember','memberId','password','profile')
+        fields = ('first_name','last_name',"middle_name",'email','phone','typeofmember','memberId','password','gender','region','organization','profession','areaofwork','typeofmember','mctnumber','avatar','collage','year')

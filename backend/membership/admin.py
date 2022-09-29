@@ -1,20 +1,12 @@
 from django.contrib import admin
-from . models import User,Profile
+from . models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
 
 # admin.site.register(User)
 
-class ProfileInline(admin.StackedInline):
-    model = Profile
-    can_delete = False
-    verbose_name_plural = 'Profile'
-    fk_name = 'user'
-
-
 class UserAdmin(BaseUserAdmin):
-    inlines = (ProfileInline,)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'first_name','last_name','phone', 'last_login')}),
         ('Permissions', {'fields': (
