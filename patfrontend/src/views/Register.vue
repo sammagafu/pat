@@ -260,47 +260,33 @@ export default {
 
         async registerUser() {
             this.authdata.isLoading = true
-
-            
-            const data = {
-                'first_name' :this.firstname,
-                'last_name' :this.lastname,
-                'middle_name' : this.middlename,
-                'phone':this.phonenumber,
-                'email':this.email,
-                'password':this.password,
-                'typeofmember':this.typeofmember
-            }
-
-            const profile = {
-                'email':this.email,
-                "gender":this.gender,
-                "region":this.region,
-                "organization":this.organization,
-                "profession":this.profession,
-                "areaofwork":this.areaofwork,
-                "mctnumber":this.mctnumber,
-                "collage":this.collage,
-                "year":this.year,
-            }
-
-    
-
-            axios.post('http://localhost:8000/api/v1/auth/users/', data).
-            // http://localhost:8000/api/v1/
+            const form = document.querySelector("#registration-form")
+            const fdata  = new FormData(form);
+            const headers = { 'Content-Type': 'multipart/form-data' };
+            fdata.append('avatar', this.avatar)
+            fdata.append('first_name', this.firstname)
+            fdata.append('middle_name', this.middlename)
+            fdata.append('last_name', this.lastname)
+            fdata.append('email', this.email)
+            fdata.append('phone', this.phonenumber)
+            fdata.append('password', this.password)
+            fdata.append('mctnumber', this.mct)
+            fdata.append('gender', this.gender)
+            fdata.append('region', this.region)
+            fdata.append('profession', this.profession)
+            fdata.append('organization', this.organization)
+            fdata.append('areaofwork', this.industry)
+            fdata.append('typeofmember', this.typeofmember)
+            console.log(fdata);
+            axios.post('http://api.pediatrics.or.tz/api/v1/auth/users/', fdata, { headers }).
                 then(response => {
-                    // router.push({ name: 'login' })
+                    router.push({ name: 'login' })
                 }).catch(error => {
                     this.err = error.response.data.
                     console.log(error)
                 })
-
-            axios.post('http://localhost:8000/api/v1/user/profile/',profile)
-            .then(response => {})
-            .catch(error => {})
                 this.authdata.isLoading = false
         },
-        
         validateEmail(value) {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
                 this.msg['email'] = '';

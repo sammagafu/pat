@@ -6,21 +6,21 @@
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="filter">Search</label>
                         <input type="text" name="filter" id="filter" placeholder="Enter users name, email, or mct number" v-model="keyword">
-                    </div>
+                    </div> -->
                     
                     <div class="card" v-for="me in member" :key="member.id">
                         <div class="row">
-                            <div class="col-md-2" v-if="me.avatar == 'http://localhost:8000/default.jpg'">
+                            <!-- <div class="col-md-2" v-if="me.avatar == 'http://localhost:8000/default.jpg'">
                                 <div class="img">
                                     <img src="../assets/images/avatar.jpg">
                                 </div>
-                            </div>
-                            <div class="col-md-2" v-else>
+                            </div> -->
+                            <div class="col-md-2">
                                 <div class="img">
-                                    <img :src="me.avatar">
+                                    <img :src="me.get_avatar">
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -76,7 +76,11 @@ export default {
         }
     },
     methods: {
+        
+
         async getmebers() {
+
+
             await axios.get("http://api.pediatrics.or.tz/api/v1/user/").then(response => {
                 this.member = response.data;
                 console.log(response.data);

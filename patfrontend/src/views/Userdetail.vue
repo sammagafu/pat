@@ -6,17 +6,17 @@
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8">
+                    <img :src="user.x" alt="">
                     <h2>My Profile for {{user.first_name}} {{user.last_name}}</h2>
                     <p>Membership ID: {{user.memberId}}</p>
                     <p>Member type: {{user.typeofmember}}</p>
                     <hr>
                     <p>First name : {{user.first_name}}</p>
-                    <p>Middle name : {{user.middlename}}</p>
+                    <p>Middle name : {{user.middle_name}}</p>
                     <p>Last Name : {{user.last_name}}</p>
                     <p>Gender : {{user.gender}}</p>
-                    <p>Username : {{user.username}}</p>
                     <p>email : {{user.email}}</p>
-                    <p>Phone Number : {{user.phone_number}}</p>
+                    <p>Phone Number : {{user.phone}}</p>
                     
                     <hr>
                     <p>MCT Number : {{user.mctnumber}}</p>
@@ -41,6 +41,7 @@
         setup(){
             const user = ref([])
             const route = useRoute()
+            
             
             onMounted(() => {
             axios.get(`http://api.pediatrics.or.tz/api/v1/user/${route.params.membershipid}`)

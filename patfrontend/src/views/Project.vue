@@ -214,7 +214,7 @@
         },
         methods:{
         getResources(){
-            axios.get("http://api.pediatrics.or.tz/api/v1/project/")
+            axios.get("http://localhost:8000/api/v1/project/")
             .then(response => {
                         this.projects = response.data;
                         console.log(this.projects)
