@@ -85,8 +85,6 @@ else:
     }
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -170,17 +168,17 @@ REST_FRAMEWORK = {
     
 }
 
-DJOSER = {
-    'user_create': ['rest_framework.permissions.AllowAny'],
-    # 'user_list': ['rest_framework.permissions.AllowAny'],
-    'user': ['rest_framework.permissions.AllowAny'],
-    'SERIALIZERS': {
-        'user_create': 'membership.serializer.UserSerializerCreate',
-        'current_user' : 'membership.serializer.UserSerializer',
-        'user' : 'membership.serializer.UserSerializer',
-        },
+# DJOSER = {
+#     'user_create': ['rest_framework.permissions.AllowAny'],
+#     # 'user_list': ['rest_framework.permissions.AllowAny'],
+#     'user': ['rest_framework.permissions.AllowAny'],
+#     'SERIALIZERS': {
+#         'user_create': 'membership.serializer.UserSerializerCreate',
+#         'current_user' : 'membership.serializer.UserSerializer',
+#         'user' : 'membership.serializer.UserSerializer',
+#         },
     
 
-}
+# }
 
 AUTH_USER_MODEL = 'membership.User'
