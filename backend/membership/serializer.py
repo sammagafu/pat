@@ -1,19 +1,58 @@
-from dataclasses import fields
-from statistics import mode
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from . models import User
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.password_validation import validate_password
 
-from djoser.serializers import  UserCreateSerializer as BaseUserCreateSerializer
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.password_validation import validate_password
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta(BaseUserCreateSerializer.Meta):
-        fields = ('id','first_name','last_name',"middle_name",'email','phone','typeofmember','memberId','gender','region','organization','profession','areaofwork','typeofmember','mctnumber','avatar','collage','year','get_avatar')
-        write_only_fields = ['password']
-        read_only_fields = ['get_avatar']
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
-class UserSerializerCreate(BaseUserCreateSerializer):
-    class Meta(BaseUserCreateSerializer.Meta):
-        fields = ('first_name','last_name',"middle_name",'email','phone','typeofmember','memberId','gender','region','organization','profession','areaofwork','typeofmember','mctnumber','avatar','collage','year')
-        read_only_fields = ['get_avatar']
-        write_only_fields = ['password']
+    @classmethod
+    def get_token(cls, user):
+        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+        token['email'] = user.email
+        return token
 
+
+class RegisterSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
+    phone = serializers.CharField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password],style={'input_type': 'password'})
+
+    class Meta:
+        model = User
+        fields = ('pk','email','password','first_name', 'middle_name', 'last_name',
+         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','avatar','collage','year')
+        extra_kwargs = {
+            'first_name': {'required': True},
+            'last_name': {'required': True},
+            'phone': {'required': True},
+            'typeofmember': {'required': True},
+            'region': {'required': True},
+            'organization': {'required': True},
+            'profession': {'required': True},
+            'areaofwork': {'required': True},
+            'avatar': {'required': True},
+        }
+
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['email'], 
+        validated_data['password']
+        )
+        user.phone = validated_data['phone']
+        user.typeofmember = validated_data['typeofmember']
+        user.region = validated_data['region']
+        user.organization = validated_data['organization']
+        user.profession = validated_data['profession']
+        user.areaofwork = validated_data['areaofwork']
+        user.mctnumber = validated_data['mctnumber']
+        user.avatar = validated_data['avatar']
+        user.collage = validated_data['collage']
+        user.year = validated_data['year']
+        user.first_name = validated_data['first_name']
+        user.middle_name = validated_data['middle_name']
+        user.last_name  = validated_data['last_name']
+        user.save()
+        return user

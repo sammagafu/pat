@@ -1,17 +1,13 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from .views import MyObtainTokenPairView
+from rest_framework_simplejwt.views import TokenRefreshView
 from . import views
 
-# profilerouter = DefaultRouter()
-# profilerouter.register('',views.ProfileUpdate, basename="Profile")
-
-user_router = DefaultRouter()
-user_router.register('',views.ProfileViewSet, basename="User")
 
 urlpatterns = [
-    path('',include(user_router.urls)),
-    # path('profile/',include(profilerouter.urls)),
-    # path('profile/',views.ProfileUpdate.as_view()),
-    # path('<int:pk>',views.UserDetailView.as_view()),
-    path('<str:memberId>',views.SpecificUserView.as_view())
+    path('login/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('users/', views.Users.as_view(), name='register'),
+    path('users/<int:pk>/', views.UsersDetail.as_view(), name='user'),
 ]

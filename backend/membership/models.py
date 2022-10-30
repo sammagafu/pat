@@ -11,24 +11,22 @@ from django.dispatch import receiver
 from django.utils import timezone
 import random
 
-
 class UserManager(BaseUserManager):
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
         now = timezone.now()
         email = self.normalize_email(email)
-
         user = self.model(
-        email=email,
-        is_staff=is_staff, 
-        is_active=True,
-        is_approved=False,
-        is_superuser=is_superuser, 
-        last_login=now,
-        date_joined=now, 
-        **extra_fields
-    )
+            email=email,
+            is_staff=is_staff,
+            is_active=True,
+            is_approved=False,
+            is_superuser=is_superuser, 
+            last_login=now,
+            date_joined=now, 
+            **extra_fields
+            )
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -39,6 +37,25 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, **extra_fields):
         user=self._create_user(email, password, True, True, **extra_fields)
         return user
+
+    
+    def has_perm(self, perm, obj=None):
+        return self.admin
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.staff
+
+    @property
+    def is_admin(self):
+        return self.admin
+
+    @property
+    def is_active(self):
+        return self.active
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -146,7 +163,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     organization = models.CharField(_("Your Organization"), max_length=180)
     profession = models.CharField(_("Your Profession"), max_length=180,choices=Proffesion)
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
-    typeofmember = models.CharField(_("Membership type"), max_length=180,choices=TypeOfMember)
     mctnumber = models.CharField(_("MCT Number"), max_length=50,blank=True,null=True)
     avatar = ResizedImageField(upload_to = 'profile/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
     collage = models.CharField(_("Collage that you had your masters"), max_length=180,blank=True,null=True)
@@ -179,61 +195,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Ordinary Member":
-            self.memberId = "pat-od-"+ str(random.randint(0, 1000))
+            self.memberId = "pat-od-"+ self.id
         else:
             self.memberId = "pat-as-"+ str(random.randint(0,1000))
         super(User,self).save()
 
-        
-# # class Profile(models.Model):
-
-
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     gender = models.CharField(_("Gender"), max_length=8,choices=GENDER)
-#     region = models.CharField(_("Region"), max_length=50,choices=REGION)
-#     organization = models.CharField(_("Your Organization"), max_length=180)
-#     profession = models.CharField(_("Your Profession"), max_length=180,choices=Proffesion)
-#     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
-#     mctnumber = models.CharField(_("MCT Number"), max_length=50,blank=True,null=True)
-#     collage = models.CharField(_("Collage that you had your masters"), max_length=180,blank=True,null=True)
-#     year = models.IntegerField(_("Year that you graduated"),blank=True,null=True)
-#     avatar = ResizedImageField(upload_to = 'profile/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
-
-
-
-#     def __str__(self):  # __unicode__ for Python 2
-#         return self.user.email
-
-#     def get_avatar(self):
-#         if self.avatar:
-#             return 'http://api.pediatrics.or.tz' + self.avatar.url
-#         return ''
-
-#     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-#     def create_user_profile(sender, instance, created, **kwargs):
-#         if created:
-#             Profile.objects.create(user=instance)
-
-#     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-#     def save_user_profile(sender, instance, **kwargs):
-#         instance.profile.save()
-
-# # @receiver(post_save, sender=User)
-# # def create_or_update_user_profile(sender, instance, created, **kwargs):
-# #     if created:
-# #         Profile.objects.create(user=instance)
-# #     instance.profile.save()
-
-
-# end of users profile
-
-MEMBERSHIP_CHOICES = (
+class Membership(models.Model):
+    MEMBERSHIP_CHOICES = (
     ('Associate Plan', 'Associate Plan'),
     ('Ordinary Plan', 'Ordinary Plan'),
 )
 
 
-class Membership(models.Model):
     slug = models.SlugField()
     membership_type = models.CharField(
         choices=MEMBERSHIP_CHOICES,

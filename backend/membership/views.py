@@ -1,34 +1,26 @@
-import email
-from rest_framework import generics, viewsets, mixins
+from .serializer import MyTokenObtainPairSerializer
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializer import RegisterSerializer
 from . models import User
-from .serializer import UserSerializer
-from django.shortcuts import get_object_or_404
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics
 
 
-class SpecificUserView(generics.RetrieveAPIView):
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+
+
+class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-    lookup_field = 'memberId'
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-
-    """
+class Users(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-    http_method_names = ['get','post','retrieve','put','patch']
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 
-    class UserViewSet(viewsets.ModelViewSet):
-        """
-        This viewset automatically provides `list`, `create`, `retrieve`,
-        `update` and `destroy` actions.
-
-        """
-        queryset = User.objects.all()
-        serializer_class = UserSerializer
-        http_method_names = ['get','post','retrieve','put','patch']
+class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
