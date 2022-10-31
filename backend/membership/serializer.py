@@ -24,18 +24,20 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk','email','password','first_name', 'middle_name', 'last_name',
-         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','avatar','collage','year')
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True},
-            'phone': {'required': True},
-            'typeofmember': {'required': True},
-            'region': {'required': True},
-            'organization': {'required': True},
-            'profession': {'required': True},
-            'areaofwork': {'required': True},
-            'avatar': {'required': True},
-        }
+         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','avatar','collage','year','get_avatar','get_user_fullname','is_active','is_approved','is_staff')
+        read_only_fields = ('get_avatar','get_user_fullname','is_active','is_approved','is_staff')
+        # extra_kwargs = {
+        #     'first_name': {'required': True},
+        #     'last_name': {'required': True},
+        #     'phone': {'required': True},
+        #     'typeofmember': {'required': True},
+        #     'region': {'required': True},
+        #     'organization': {'required': True},
+        #     'profession': {'required': True},
+        #     'areaofwork': {'required': True},
+        #     'avatar': {'required': True},
+        # }
+        
 
     def create(self, validated_data):
         user = User.objects.create_user(validated_data['email'], 

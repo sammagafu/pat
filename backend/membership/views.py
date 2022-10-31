@@ -24,3 +24,4 @@ class Users(generics.ListAPIView):
 class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
