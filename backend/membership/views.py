@@ -25,3 +25,4 @@ class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+    lookup_field = "memberId"
