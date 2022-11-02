@@ -44,7 +44,7 @@
             
             
             onMounted(() => {
-            axios.get(`http://api.pediatrics.or.tz/api/v1/user/${route.params.membershipid}`)
+            axios.get(`http://api.pediatrics.or.tz/api/v1/users/${route.params.membershipid}`)
                 .then(response => {
                     user.value = response.data;
                     // console.log(response.data)

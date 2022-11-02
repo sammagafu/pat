@@ -81,35 +81,36 @@
                     password: this.password
                 }
 
-                await axios.post('http://api.pediatrics.or.tz/api/v1/auth/token/login/', loginData)
+                await axios.post('http://api.pediatrics.or.tz/api/v1/auth/login/', loginData)
                     .then(response => {
-                        const token = response.data.auth_token
+                        const token = response.data
                         userStore.token = token
                         userStore.isAuthenticated =true
                         localStorage.setItem('token', JSON.stringify(token));
+                        // console.log(response)
                         axios.defaults.headers.common["Authorization"] = "Token " + token
                     }).catch(error => {
                         console.log(error)
                     })
 
-                await axios
-                    .get('http://api.pediatrics.or.tz/api/v1/auth/users/me/')
-                    .then(response => {
-                        // this.$store.commit('setUser', {
-                        //     'id': response.data.id,
-                        //     'email': response.data.email
-                        // })
-                        userStore.setUser({
-                            'id':response.data.id,
-                            'email':response.data.email,
-                        })
-                        localStorage.setItem('email', response.data.email)
-                        localStorage.setItem('userid', response.data.id)
-                    })
-                    .catch(error => {
-                        console.log(error.response.data)
-                        this.message = error.response.data
-                    })
+                // await axios
+                //     .get('http://api.pediatrics.or.tz/api/v1/auth/users/me/')
+                //     .then(response => {
+                //         // this.$store.commit('setUser', {
+                //         //     'id': response.data.id,
+                //         //     'email': response.data.email
+                //         // })
+                //         userStore.setUser({
+                //             'id':response.data.id,
+                //             'email':response.data.email,
+                //         })
+                //         localStorage.setItem('email', response.data.email)
+                //         localStorage.setItem('userid', response.data.id)
+                //     })
+                //     .catch(error => {
+                //         console.log(error.response.data)
+                //         this.message = error.response.data
+                //     })
 
                     const toPath = this.$route.query.to || '/resource'
                     this.$router.push(toPath)

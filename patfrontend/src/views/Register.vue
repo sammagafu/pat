@@ -261,7 +261,7 @@ export default {
         async registerUser() {
             this.authdata.isLoading = true
             const form = document.querySelector("#registration-form")
-            const fdata  = new FormData(form);
+            const fdata  = new FormData();
             const headers = { 'Content-Type': 'multipart/form-data' };
             fdata.append('avatar', this.avatar)
             fdata.append('first_name', this.firstname)
@@ -278,7 +278,7 @@ export default {
             fdata.append('areaofwork', this.industry)
             fdata.append('typeofmember', this.typeofmember)
             console.log(fdata);
-            axios.post('http://api.pediatrics.or.tz/api/v1/auth/users/', fdata, { headers }).
+            axios.post('http://api.pediatrics.or.tz/api/v1/auth/register/', fdata, { headers }).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {

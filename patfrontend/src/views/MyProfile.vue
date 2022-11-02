@@ -12,10 +12,9 @@
                     <p>Member type: {{user.typeofmember}}</p>
                     <hr>
                     <p>First name : {{user.first_name}}</p>
-                    <p>Middle name : {{user.middlename}}</p>
+                    <p>Middle name : {{user.middle_name}}</p>
                     <p>Last Name : {{user.last_name}}</p>
                     <p>Gender : {{user.gender}}</p>
-                    <p>Username : {{user.username}}</p>
                     <p>email : {{user.email}}</p>
                     <p>Phone Number : {{user.phone_number}}</p>
                     

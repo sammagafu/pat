@@ -11,7 +11,7 @@
                         <input type="text" name="filter" id="filter" placeholder="Enter users name, email, or mct number" v-model="keyword">
                     </div> -->
                     
-                    <div class="card" v-for="me in member" :key="member.id">
+                    <div class="card" v-for="me in members" :key="members.id">
                         <div class="row">
                             <!-- <div class="col-md-2" v-if="me.avatar == 'http://localhost:8000/default.jpg'">
                                 <div class="img">
@@ -26,7 +26,7 @@
                             <div class="col-md-8">
                                 <div class="infos">
                             <div class="name">
-                                <h2 class="userlink"><router-link :to="{name:'userdetails',params:{membershipid:me.memberId}}">{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</router-link></h2>
+                                <h2 class="userlink"><router-link :to="{name:'userdetails',params:{membershipid:me.pk}}">{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</router-link></h2>
                                 <h4>{{me.memberId}}</h4>
                             </div>
                             <p class="text">{{me.organization}}</p>
@@ -55,38 +55,26 @@
 </template>
 <script>
 import axios from 'axios';
+import { authStore } from '../stores/usersStore';
 import AuthSideBar from '../components/AuthSideBar.vue';
+import { ref, onMounted } from 'vue'
 export default {
-    data() {
+    setup(){
+        const authdata = authStore()
+        const members = ref([])
+
+        onMounted(() => {
+            axios.get('http://api.pediatrics.or.tz/api/v1/auth/users/')
+                .then(response => {
+                    members.value = response.data;
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        })
         return {
-            member: [],
-            filteredmembers: [],
-            keyword: '',
-        };
-    },
-    mounted() {
-        this.getmebers();
-    },
-    computed : {
-        filteredmembers(){
-            let tempmambers = this.member
-            tempmambers = tempmambers.filter((item) =>{
-                return console.log(item);
-            })
-        }
-    },
-    methods: {
-        
-
-        async getmebers() {
-
-
-            await axios.get("http://api.pediatrics.or.tz/api/v1/user/").then(response => {
-                this.member = response.data;
-                console.log(response.data);
-            }).catch(error => {
-                console.log(error);
-            });
+            members
         }
     },
     components: { AuthSideBar }
