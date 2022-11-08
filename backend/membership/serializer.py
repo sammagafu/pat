@@ -24,8 +24,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk','email','password','first_name', 'middle_name', 'last_name','memberId',
-         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','avatar','collage','year','get_avatar','get_user_fullname','is_active','is_approved','is_staff')
-        read_only_fields = ('get_avatar','get_user_fullname','is_active','is_approved','is_staff')
+         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year','get_avatar','get_user_fullname','is_active','is_approved','is_staff')
+        # read_only_fields = ('get_avatar','get_user_fullname','is_active','is_approved','is_staff')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True},
@@ -56,5 +56,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.first_name = validated_data['first_name']
         user.middle_name = validated_data['middle_name']
         user.last_name  = validated_data['last_name']
+        user.gender  = validated_data['gender']
         user.save()
         return user
+
+
+class UpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','memberId']
