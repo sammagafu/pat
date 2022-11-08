@@ -16,7 +16,7 @@
                     <p>Last Name : {{user.last_name}}</p>
                     <p>Gender : {{user.gender}}</p>
                     <p>email : {{user.email}}</p>
-                    <p>Phone Number : {{user.phone_number}}</p>
+                    <p>Phone Number : {{user.phone}}</p>
                     
                     <hr>
                     <p>MCT Number : {{user.mctnumber}}</p>
@@ -41,13 +41,15 @@ export default {
     },
     setup() {
         const authdata = authStore()
-        const userdata = ref(authdata.user.id)
+        const token = authdata.token
         let user = ref([])
         // function onUnmounted(callback: () => void): void
+        // { headers: {"Authorization" : `Bearer ${token}`} }
+        console.log(token)
         onMounted(() => {
-            axios.get('http://api.pediatrics.or.tz/api/v1/auth/users/me/',{
+            axios.get('http://localhost:8000/api/v1/auth/users/me/',{
                 headers: {
-                    'Authorization': `token ${authdata.token}`
+                    "Authorization" : `Bearer ${token}`
                 }
             })
                 .then(response => {

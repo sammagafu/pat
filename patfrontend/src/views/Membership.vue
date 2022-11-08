@@ -13,20 +13,25 @@
                     
                     <div class="card" v-for="me in members" :key="members.id">
                         <div class="row">
-                            <!-- <div class="col-md-2" v-if="me.avatar == 'http://localhost:8000/default.jpg'">
+                            <template v-if="me.avatar == 'http://localhost:8000/default.jpg'">
+                            <div class="col-md-2">
                                 <div class="img">
                                     <img src="../assets/images/avatar.jpg">
                                 </div>
-                            </div> -->
+                            </div>
+                            </template>
+
+                            <template v-else>
                             <div class="col-md-2">
                                 <div class="img">
                                     <img :src="me.get_avatar">
                                 </div>
                             </div>
+                            </template>
                             <div class="col-md-8">
                                 <div class="infos">
                             <div class="name">
-                                <h2 class="userlink"><router-link :to="{name:'userdetails',params:{membershipid:me.pk}}">{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</router-link></h2>
+                                <h2 class="userlink"><router-link :to="{name:'userdetails',params:{membershipid:me.memberId}}">{{ me.first_name }} {{ me.middlename }} {{ me.last_name }}</router-link></h2>
                                 <h4>{{me.memberId}}</h4>
                             </div>
                             <p class="text">{{me.organization}}</p>
@@ -64,7 +69,7 @@ export default {
         const members = ref([])
 
         onMounted(() => {
-            axios.get('http://api.pediatrics.or.tz/api/v1/auth/users/')
+            axios.get('http://localhost:8000/api/v1/auth/users/')
                 .then(response => {
                     members.value = response.data;
                     console.log(response.data)

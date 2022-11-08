@@ -7,10 +7,12 @@ export const authStore = defineStore({
   state: () => ({
     isAuthenticated: false,
     isLoading: false,
-    // token: JSON.parse(localStorage.getItem('token')),
+    token: JSON.parse(localStorage.getItem('token')),
     user: {
       id: localStorage.getItem('userid'),
-      email: localStorage.getItem('email')
+      email: localStorage.getItem('email'),
+      is_staff: localStorage.getItem('is_staff'),
+      memberId: localStorage.getItem('memberId')
     },
 
     

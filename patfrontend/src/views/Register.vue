@@ -278,7 +278,7 @@ export default {
             fdata.append('areaofwork', this.industry)
             fdata.append('typeofmember', this.typeofmember)
             console.log(fdata);
-            axios.post('http://api.pediatrics.or.tz/api/v1/auth/register/', fdata, { headers }).
+            axios.post('http://localhost:8000/api/v1/auth/register/', fdata, { headers }).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {

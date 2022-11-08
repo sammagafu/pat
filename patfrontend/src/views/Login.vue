@@ -81,36 +81,41 @@
                     password: this.password
                 }
 
-                await axios.post('http://api.pediatrics.or.tz/api/v1/auth/login/', loginData)
+                await axios.post('http://localhost:8000/api/v1/auth/login/', loginData)
                     .then(response => {
-                        const token = response.data
+                        const token = response.data.access
                         userStore.token = token
                         userStore.isAuthenticated =true
                         localStorage.setItem('token', JSON.stringify(token));
-                        // console.log(response)
-                        axios.defaults.headers.common["Authorization"] = "Token " + token
+                        console.log(response.data)
+                        axios.defaults.headers.common["Authorization"] = "Bearer " + token
                     }).catch(error => {
                         console.log(error)
                     })
 
-                // await axios
-                //     .get('http://api.pediatrics.or.tz/api/v1/auth/users/me/')
-                //     .then(response => {
-                //         // this.$store.commit('setUser', {
-                //         //     'id': response.data.id,
-                //         //     'email': response.data.email
-                //         // })
-                //         userStore.setUser({
-                //             'id':response.data.id,
-                //             'email':response.data.email,
-                //         })
-                //         localStorage.setItem('email', response.data.email)
-                //         localStorage.setItem('userid', response.data.id)
-                //     })
-                //     .catch(error => {
-                //         console.log(error.response.data)
-                //         this.message = error.response.data
-                //     })
+                await axios
+                    .get('http://localhost:8000/api/v1/auth/users/me/',{
+                        // headers: {
+                        //     "Authorization" : `Bearer ${token}`
+                        // }
+                    })
+                    .then(response => {
+                        userStore.setUser({
+                            'userid':response.data.pk,
+                            'email':response.data.email,
+                            'is_staff':response.data.is_staff,
+                            'memberId':response.data.memberId,
+                        })
+                        localStorage.setItem('email', response.data.email)
+                        localStorage.setItem('userid', response.data.pk)
+                        localStorage.setItem('is_staff', response.data.is_staff)
+                        localStorage.setItem('memberId', response.data.memberId)
+                
+                    })
+                    .catch(error => {
+                        console.log(error.response.data)
+                        this.message = error.response.data
+                    })
 
                     const toPath = this.$route.query.to || '/resource'
                     this.$router.push(toPath)
