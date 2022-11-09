@@ -12,7 +12,7 @@ class ActivityRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ActivityRequest
-        fields = ['request','project','requestdate','description','requestedbby','approvedby','approveddate','activity']
+        fields = ['project','requestdate','description','requestedbby','approvedby','approveddate','activity']
     
     def create(self, validated_data):
         tracks_data = validated_data.pop('activity')
