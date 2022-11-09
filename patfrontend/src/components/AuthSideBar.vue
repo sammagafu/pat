@@ -44,9 +44,8 @@
             </div>
             <div class="widget-body">
                 <ul class="single-department-list">
-                    <li><router-link :to="{name:'profile'}" class="link-level-1">Create Activity Request <i class="fas fa-angle-right"></i> </router-link></li>
-                    <li><router-link :to="{name:'updateaccount'}" class="link-level-1">Pending Activity Request <i class="fas fa-angle-right"></i> </router-link></li>
-                    <li><router-link :to="{name:'updateaccount'}" class="link-level-1">Approved  Activity Request <i class="fas fa-angle-right"></i> </router-link></li>
+                    <li><router-link :to="{name:'create-activity'}" class="link-level-1">Create Activity Request <i class="fas fa-angle-right"></i> </router-link></li>
+                    <li><router-link :to="{name:'activity'}" class="link-level-1">Activity Request <i class="fas fa-angle-right"></i> </router-link></li>
                 </ul>
             </div>
         </div>

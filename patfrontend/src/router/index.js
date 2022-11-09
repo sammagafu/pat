@@ -83,7 +83,7 @@ const router = createRouter({
       ]
     },
     {
-      path: '/account',
+      path: '/account/',
       name: 'account',
       children : [
         {
@@ -107,6 +107,22 @@ const router = createRouter({
           component : () => import('@/views/UpdateUserProfile.vue')
         },
       ]
+    },
+    {
+      path: '/activity-request/',
+      children :[
+        {
+          path:'create',
+          name:'create-activity',
+          component : () => import('@/views/activityRequest/CreateActivity.vue'), 
+        },
+        {
+          path:'',
+          name:'activity',
+          component : () => import('@/views/activityRequest/GetActivity.vue'), 
+        },
+      ]
+
     }
 
   ]
