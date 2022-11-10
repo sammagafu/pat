@@ -28,12 +28,8 @@
 
                                 <div class="mb-3">
                                     <div class="form-group">
-                                        <label for="activityRequestDescription">Request Description<span
-                                                style="color: red">*</span></label>
-                                        <textarea name="descriptio" id="activityRequestDescription"
-                                            class="form-control"></textarea>
-                                        <!-- <input type="text" v-model="activityRequest"  id="activityRequest" required> -->
-
+                                        <label for="activityRequestDescription">Request Description<span style="color: red">*</span></label>
+                                        <textarea name="description" id="activityRequestDescription" class="form-control" v-model="description"></textarea>
                                     </div>
                                 </div>
 
@@ -101,6 +97,7 @@ export default {
             ],
             count: 1,
             activityRequest: null,
+            description : '',
         }
     },
     mounted() {
@@ -109,7 +106,6 @@ export default {
     methods: {
         getAllDonors() {
             axios.get('http://localhost:8000/api/v1/project/').then(response => {
-                // console.log(response.data);
                 this.project = response.data
             }).catch(error => {
                 console.log(error);
@@ -127,7 +123,11 @@ export default {
             this.request.splice(index,1)
         },
         createActivityRequest(){
+            this.activityRequest
+            this.description
             const data = this.request
+
+            console.log(data);
             alert(JSON.stringify(data))
         }
 

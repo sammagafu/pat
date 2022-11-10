@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "html-to-pdfmake": "^2.4.9",
+    "html2pdf.js": "^0.10.1",
     "jspdf": "^2.5.1",
     "pdfmake": "^0.2.6",
     "pinia": "^2.0.17",
