@@ -216,6 +216,9 @@
 
 <style scoped>
   .breadcrumb-header{
-    background-image: url(../assets/images/header/01_header.jpg)
+    background-position: center;
+    background-size: cover;
+    background-image: url(../assets/images/header/07_header.jpg);
+    height: 60vh;
   }
 </style>

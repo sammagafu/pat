@@ -269,4 +269,8 @@
   padding: 20 !important;
 }
 
+.handline{
+  color: #fff;
+}
+
 </style>

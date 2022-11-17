@@ -169,13 +169,13 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <div class="form-group">
                                 <label class="control-label" for="avatar">Avatar (Add your passport for your ID or you can update later)</label>
                                 <br>
                                 <input type="file" name="image" id="avatar" placeholder="passport image for your avatar" @change="onFileUpload" ref="avatar">
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <template v-if="typeofmember == Ordinary Member">
                         </template> -->
@@ -246,39 +246,36 @@ export default {
             graduation: '',
             masters: '',
             year : '',
-            avatar: null,
             msg: [],
             err : [],
             isDisabled:true
         }
     },
     methods: {
-        onFileUpload (event) {
-          this.avatar = event.target.files[0]
-          console.log(this.avatar);
-        },
+        // onFileUpload (event) {
+        //   this.avatar = event.target.files[0]
+        //   console.log(this.avatar);
+        // },
 
         async registerUser() {
             this.authdata.isLoading = true
-            const form = document.querySelector("#registration-form")
-            const fdata  = new FormData();
-            const headers = { 'Content-Type': 'multipart/form-data' };
-            fdata.append('avatar', this.avatar)
-            fdata.append('first_name', this.firstname)
-            fdata.append('middle_name', this.middlename)
-            fdata.append('last_name', this.lastname)
-            fdata.append('email', this.email)
-            fdata.append('phone', this.phonenumber)
-            fdata.append('password', this.password)
-            fdata.append('mctnumber', this.mct)
-            fdata.append('gender', this.gender)
-            fdata.append('region', this.region)
-            fdata.append('profession', this.profession)
-            fdata.append('organization', this.organization)
-            fdata.append('areaofwork', this.industry)
-            fdata.append('typeofmember', this.typeofmember)
-            console.log(fdata);
-            axios.post('http://localhost:8000/api/v1/auth/register/', fdata, { headers }).
+            
+                const fdata  = new FormData();
+                fdata.append('first_name', this.firstname)
+                fdata.append('middle_name', this.middlename)
+                fdata.append('last_name', this.lastname)
+                fdata.append('email', this.email)
+                fdata.append('phone', this.phonenumber)
+                fdata.append('password', this.password)
+                fdata.append('mctnumber', this.mct)
+                fdata.append('gender', this.gender)
+                fdata.append('region', this.region)
+                fdata.append('profession', this.profession)
+                fdata.append('organization', this.organization)
+                fdata.append('areaofwork', this.industry)
+                fdata.append('typeofmember', this.typeofmember)
+  
+            axios.post('http://localhost:8000/api/v1/auth/register/', fdata,).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {
