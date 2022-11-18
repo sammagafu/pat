@@ -164,7 +164,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     profession = models.CharField(_("Your Profession"), max_length=180,choices=Proffesion)
     areaofwork = models.CharField(_("Area of work"), max_length=180,choices=AreaOfWork)
     mctnumber = models.CharField(_("MCT Number"), max_length=50,blank=True,null=True)
-    avatar = ResizedImageField(upload_to = 'profile/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg')
+    avatar = ResizedImageField(upload_to = 'profile/images/%Y/%m/%d',verbose_name=_("Profile Image"),size=[300, 300], crop=['middle', 'center'],default='default.jpg',blank=True)
     collage = models.CharField(_("Collage that you had your masters"), max_length=180,blank=True,null=True)
     year = models.IntegerField(_("Year that you graduated"),blank=True,null=True)
     
@@ -190,7 +190,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_avatar(self):
         if self.avatar:
-            return 'http://api.pediatrics.or.tz' + self.avatar.url
+            return 'http://127.0.0.1:8000' + self.avatar.url
         return ''
 
     def save(self,*args, **kwargs):

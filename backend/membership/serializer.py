@@ -35,7 +35,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             'organization': {'required': True},
             'profession': {'required': True},
             'areaofwork': {'required': True},
-            'avatar': {'required': True},
         }
         
 
@@ -50,7 +49,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.profession = validated_data['profession']
         user.areaofwork = validated_data['areaofwork']
         user.mctnumber = validated_data['mctnumber']
-        user.avatar = validated_data['avatar']
         user.collage = validated_data['collage']
         user.year = validated_data['year']
         user.first_name = validated_data['first_name']
