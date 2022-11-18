@@ -245,7 +245,7 @@ export default {
             typeofmember: 'Associate Member',
             graduation: '',
             masters: '',
-            year : '',
+            year : null,
             msg: [],
             err : [],
             isDisabled:true
@@ -259,23 +259,27 @@ export default {
 
         async registerUser() {
             this.authdata.isLoading = true
+
+            const registradionData ={
+                'first_name' : this.firstname,
+                'middle_name' : this.middlename,
+                'last_name': this.lastname,
+                'email': this.email,
+                'phone': this.phonenumber,
+                'password': this.password,
+                'mctnumber': this.mct,
+                'gender': this.gender,
+                'region': this.region,
+                'profession': this.profession,
+                'organization': this.organization,
+                'areaofwork': this.industry,
+                'typeofmember': this.typeofmember,
+                'collage':this.masters,
+                'year':this.year,
+            }
             
-                const fdata  = new FormData();
-                fdata.append('first_name', this.firstname)
-                fdata.append('middle_name', this.middlename)
-                fdata.append('last_name', this.lastname)
-                fdata.append('email', this.email)
-                fdata.append('phone', this.phonenumber)
-                fdata.append('password', this.password)
-                fdata.append('mctnumber', this.mct)
-                fdata.append('gender', this.gender)
-                fdata.append('region', this.region)
-                fdata.append('profession', this.profession)
-                fdata.append('organization', this.organization)
-                fdata.append('areaofwork', this.industry)
-                fdata.append('typeofmember', this.typeofmember)
-  
-            axios.post('http://localhost:8000/api/v1/auth/register/', fdata,).
+
+            axios.post('http://localhost:8000/api/v1/auth/register/', registradionData,).
                 then(response => {
                     router.push({ name: 'login' })
                 }).catch(error => {
