@@ -6,7 +6,7 @@
         <div class="container">
             <div class="col-md-4 offset-md-4">
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        <form @submit.prevent="login">
+                        <form @submit.prevent="userLoging">
                             <!-- Email input -->
                             <div class="alert alert-danger" role="alert" v-if="message">
                                 {{message.detail}}
@@ -56,70 +56,36 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import { authStore } from "@/stores/usersStore";
+    import { ref } from "vue";
+    import { useRouter, useRoute } from 'vue-router'
 
-    const userStore = authStore()
 
     export default{
-        data(){
-            return {
-                email : '',
-                password : '',
-                rememberme : false,
-                message : ''
+        setup(){
+            const router = useRouter();
+
+            const userStore = authStore()
+            const email = ref('')
+            const password = ref('')
+            const rememberme = ref(false)
+            const message = ref('')
+
+            
+            function userLoging(){
+                userStore.userLogin(email.value,password.value)
+                router.push('/membership')
             }
+
+            return {
+                userStore,email,password,rememberme,message,userLoging
+            }
+
         },
         computed(){
         },
         methods : {
-            async login (){
-                localStorage.removeItem("token")
-
-                const loginData = {
-                    email: this.email,
-                    password: this.password
-                }
-
-                await axios.post('http://localhost:8000/api/v1/auth/login/', loginData)
-                    .then(response => {
-                        const token = response.data.access
-                        userStore.token = token
-                        userStore.isAuthenticated =true
-                        localStorage.setItem('token', JSON.stringify(token));
-                        console.log(response.data)
-                        axios.defaults.headers.common["Authorization"] = "Bearer " + token
-                    }).catch(error => {
-                        console.log(error)
-                    })
-
-                await axios
-                    .get('http://localhost:8000/api/v1/auth/users/me/',{
-                        // headers: {
-                        //     "Authorization" : `Bearer ${token}`
-                        // }
-                    })
-                    .then(response => {
-                        userStore.setUser({
-                            'userid':response.data.pk,
-                            'email':response.data.email,
-                            'is_staff':response.data.is_staff,
-                            'memberId':response.data.memberId,
-                        })
-                        localStorage.setItem('email', response.data.email)
-                        localStorage.setItem('userid', response.data.pk)
-                        localStorage.setItem('is_staff', response.data.is_staff)
-                        localStorage.setItem('memberId', response.data.memberId)
-                
-                    })
-                    .catch(error => {
-                        console.log(error.response.data)
-                        this.message = error.response.data
-                    })
-
-                    const toPath = this.$route.query.to || '/resource'
-                    this.$router.push(toPath)
-            }
+    
         }
     }
 </script>
