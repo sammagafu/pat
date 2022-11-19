@@ -25,18 +25,17 @@ class Users(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
-class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
+class UsersDetail(generics.RetrieveDestroyAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
-    serializer_class = UpdateSerializer
+    serializer_class = RegisterSerializer
     lookup_field = "memberId"
 
 class UserProfile(generics.RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
-    serializer_class = RegisterSerializer
+    serializer_class = UpdateSerializer
 
     def get_object(self):
         obj = get_object_or_404(User, pk=self.request.user.id)
         return obj
-

@@ -19,7 +19,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
     phone = serializers.CharField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password],style={'input_type': 'password'})
+    password = serializers.CharField(write_only=True, validators=[validate_password],style={'input_type': 'password'})
 
     class Meta:
         model = User
@@ -62,4 +62,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name','last_name','middle_name','phone','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year',]
+        fields = ['first_name','last_name','middle_name','phone','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year','typeofmember','memberId']
