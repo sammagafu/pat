@@ -62,4 +62,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name','last_name','memberId']
+        fields = ['first_name','last_name','middle_name','phone','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year',]
