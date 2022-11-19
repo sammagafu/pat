@@ -2,7 +2,7 @@
     <section class="py-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <AuthSideBar/>
                 </div>
                 <div class="col-md-8">

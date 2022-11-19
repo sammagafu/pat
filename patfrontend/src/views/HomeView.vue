@@ -9,10 +9,10 @@
             <div class="row">
               <div class="col-lg-8">
                 <div class="banner">
-                  <h1 class="handline">Welcome to The Paediatric Association Of Tanzania</h1>
-                  <p class="about-website">We maintain and improve the standards of professional competence and conduct
+                  <h1 class="handline text-white">Welcome to The Paediatric Association Of Tanzania</h1>
+                  <!-- <p class="about-website">We maintain and improve the standards of professional competence and conduct
                     Of All The Members Related To Paediatrics And Child Health.</p>
-                  <a class="btn-1 btn-2 ml-30" href="01_department.html">Our Department</a>
+                  <a class="btn-1 btn-2 ml-30" href="01_department.html">Our Department</a> -->
                 </div>
               </div>
             </div>
@@ -255,7 +255,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .about-website {
   text-transform: capitalize !important;
 }
@@ -269,8 +269,12 @@
   padding: 20 !important;
 }
 
-.handline{
+h1 .handline {
   color: #fff;
+}
+
+.overlay{
+  background-color: rgba(0, 0, 10, .6);
 }
 
 </style>

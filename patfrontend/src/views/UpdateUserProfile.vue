@@ -9,7 +9,7 @@
                     <div class="mb-4">
                         <h2>Update {{ user.first_name }}'s Profile</h2>
                     </div>
-                    <form class="inner-add-comments form-contact-1" id="registration-form" @submit.prevent="registerUser">
+                    <form class="inner-add-comments form-contact-1" id="registration-form" @submit.prevent="updateUser">
                 <div class="row">
                     <div class="col-md-6">
 
@@ -32,12 +32,6 @@
                                 <label for="lastname">Last Name <span style="color: red">*</span></label>
                                 <input type="text" v-model="lastname" class="form-control" id="lastname" required>
 
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-group">
-                                <label for="email">Email <span style="color: red">*</span></label>
-                                <input type="email" v-model="email" class="form-control" id="email" required>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -126,7 +120,7 @@
                         <div class="mb-3">
                             <label>Area of work or Industry <span style="color: red">*</span></label>
                             <select class="form-control" v-model="industry">
-                                <option value="">Work</option>
+                                <option value="Work">Work</option>
                                 <option value="Hospital">Hospital</option>
                                 <option value="Community healthcare">Community healthcare</option>
                                 <option value="Nursing/care facility">Nursing/care facility</option>
@@ -212,7 +206,6 @@ export default {
         const firstname = ref('')
         const middlename = ref('')
         const lastname = ref('')
-        const email = ref('')
         const phone = ref('')
         const mct = ref('')
         const gender = ref('')
@@ -225,12 +218,12 @@ export default {
         const masters = ref('')
         const year = ref('')
         const msg = ref([])
+
+        const token = authdata.token
         
         // function onUnmounted(callback: () => void): void
         onMounted(() => {
-            const token = authdata.token
-
-            axios.get('http://localhost:8000/api/v1/auth/users/me/',{
+            axios.get('auth/users/me/',{
                 headers: {
                     "Authorization" : `Bearer ${token}`
                 }
@@ -239,7 +232,6 @@ export default {
                     firstname.value = response.data.first_name
                     middlename.value = response.data.middle_name
                     lastname.value = response.data.last_name
-                    email.value = response.data.email
                     phone.value = response.data.phone
                     mct.value = response.data.mctnumber
                     typeofmember.value = response.data.typeofmember
@@ -247,7 +239,7 @@ export default {
                     gender.value = response.data.gender
                     profession.value = response.data.profession
                     organization.value = response.data.organization
-                    industry.value = response.data.industry
+                    industry.value = response.data.areaofwork
                     graduation.value = response.data.graduation
                     masters.value = response.data.masters
                     year.value = response.data.year
@@ -256,8 +248,29 @@ export default {
                     console.log(error);
                 });
 
-            const data = {}
-            axios.put(`http://localhost:8000/api/v1/auth/users/${authdata.user.memberId}/`,data)
+        })
+
+        function updateUser(){
+            const data = {
+                'first_name' : firstname.value,
+                'middle_name' : middlename.value,
+                'last_name': lastname.value,
+                'phone': phonenumber.value,
+                'mctnumber': mct.value,
+                'gender': gender.value,
+                'region': region.value,
+                'profession': profession.value,
+                'organization': organization.value,
+                'areaofwork': industry.value,
+                'typeofmember': typeofmember.value,
+                'collage':masters.value,
+                'year':year.value,
+            }
+            axios.put('auth/users/me/',data,{
+                headers: {
+                    "Authorization" : `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     // console.log(response.data)
                     firstname.value = response.data.first_name
@@ -266,12 +279,12 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-        })
+        }
 
 
         return {
-            firstname,middlename,lastname,email,phone,mct,gender,region,profession,organization,industry,typeofmember,graduation,masters,year,
-            user,authdata
+            firstname,middlename,lastname,phone,mct,gender,region,profession,organization,industry,typeofmember,graduation,masters,year,
+            user,authdata,updateUser
         }
     }
 }

@@ -55,7 +55,7 @@
                         </li>
 
                         <li class="item-level-1">
-                            <a href="https://pat.co.tz/" class="link-level-1">Conferences</a>
+                            <router-link :to="{name:'conference'}" class="link-level-1">Conferences</router-link>
                         </li>
                         <li class="item-level-1">
                             <router-link :to="{name:'projects'}" class="link-level-1">Projects</router-link>

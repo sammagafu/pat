@@ -2,7 +2,7 @@
     <section class="py-100 about-us about-us-3">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <auth-side-bar></auth-side-bar>
                 </div>
                 <div class="col-md-8" v-if="resources == null">
@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getResources() {
-            axios.get("http://api.pediatrics.or.tz/api/v1/resource/")
+            axios.get("resource/")
                 .then(response => {
                 this.resources = response.data;
             })

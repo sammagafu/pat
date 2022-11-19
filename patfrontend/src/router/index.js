@@ -48,6 +48,22 @@ const router = createRouter({
       ]
     },
     {
+      path: '/confrence/',
+      
+      children : [
+        {
+          path:"",
+          name: 'conference',
+          component: () => import('@/views/ConferenceList.vue'),
+        },
+        {
+          path:':slug',
+          name:'conferenceDetails',
+          component: ()=> import('@/views/ConferenceDetail.vue')
+        },
+      ]
+    },
+    {
       path: '/projects/',
       
       children : [

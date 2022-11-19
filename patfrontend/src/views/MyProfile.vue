@@ -2,15 +2,17 @@
     <section class="py-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <AuthSideBar />
                 </div>
-                <div class="col-md-8" id="element-to-convert">
-                    <div class="id-header">
-                        <h2 class="text-left">Membership Identification Card</h2>
+
+                <div class="col-md-6" id="element-to-convert">
+                    <div class="id-header text-center pb-4">
+                        <img src="@/assets/logo.png" alt="" style="height:130px;width:130px;">
+                        <h2 class="text-left"> PAT Membership Identity Card</h2>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 avatar">
+                        <div class="col-md-4 avatar">
                             <div v-if="user.avatar == 'http://localhost:8000/media/default.jpg'">
                                 <img :src="user.avatar" :alt="user.first_name + user.last_name" class="avatar">
                             </div>
@@ -20,13 +22,21 @@
                         </div>
 
                         <div class="col-md-8">
-                            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-                    <p>Membership ID: {{ user.memberId }}</p>
-                    <p>Member type: {{ user.typeofmember }}</p>
+                            <h2>{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h2>
+                            <p>Membership ID: {{ user.memberId }}</p>
+                            <p>Member type: {{ user.typeofmember }}</p>
                         </div>
                     </div>
                 </div>
-                <button @click="generateIdCard">Download ID </button>
+                <div class="col-md-3">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>
+                            Profile</button>
+                        <button type="button" class="btn btn-secondary"><i class="fa fa-download"
+                                aria-hidden="true" @click="generateIdCard"></i> ID Card</button>
+                    </div>
+                </div>
+                <!-- <button @click="generateIdCard"> ID Card</button> -->
             </div>
         </div>
     </section>
@@ -37,33 +47,30 @@ import AuthSideBar from '../components/AuthSideBar.vue';
 import { authStore } from '../stores/usersStore';
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
+import jsPDF from 'jsPDF'
 
 
-import html2pdf from "html2pdf.js";
 
 
 export default {
     components: {
-        AuthSideBar
+        AuthSideBar,
     },
     methods: {
         generateIdCard() {
-            html2pdf(document.getElementById("element-to-convert"), {
-                margin: 1,
-                filename: "IdCard.pdf",
-                image: { type: 'jpeg', quality: 0.98 },
-                jsPDF: { format: 'credit-card', orientation: 'l', compress: false, }
-            });
+            let pdfName = 'test';
+            var doc = new jsPDF();
+            doc.text(this.name, 10, 10);
+            doc.save(pdfName + '.pdf');
         },
     },
     setup() {
         const authdata = authStore()
         const token = authdata.token
         let user = ref([])
-        console.log(token)
 
         onMounted(() => {
-            axios.get('http://localhost:8000/api/v1/auth/users/me/', {
+            axios.get('auth/users/me/', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -88,12 +95,16 @@ export default {
 <style scoped>
 .id-header {
     padding: 12px 0;
+    margin: auto;
 }
-h2{
+
+h2 {
     font-size: medium;
     font-weight: bolder;
+    font-size: 2rem;
 }
-.avatar img{
-    width: 75px;
+
+.avatar img {
+    width: 100% !important;
 }
 </style>

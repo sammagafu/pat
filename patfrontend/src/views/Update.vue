@@ -2,7 +2,7 @@
     <section class="py-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8" v-if="update == null">
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         getResources() {
-            axios.get("http://api.pediatrics.or.tz/api/v1/update/")
+            axios.get("update/")
                 .then(response => {
                     this.update = response.data;
                     console.log(this.update)

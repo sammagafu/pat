@@ -2,7 +2,7 @@
     <section class="py-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <AuthSideBar />
                 </div>
                 <div class="col-md-8">
@@ -13,10 +13,10 @@
                     
                     <div class="card" v-for="me in members" :key="members.id">
                         <div class="row">
-                            <template v-if="me.avatar == 'http://localhost:8000/default.jpg'">
+                            <template v-if="me.avatar == 'http://localhost:8000/media/default.jpg'">
                             <div class="col-md-2">
                                 <div class="img">
-                                    <img src="../assets/images/avatar.jpg">
+                                    <img src="@/assets/images/avatar.jpg">
                                 </div>
                             </div>
                             </template>
