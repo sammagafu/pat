@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-3" v-for="(count,index) in request" :key="index">
+                                <div class="mb-3" v-for="(count,index) in activities" :key="index">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-3">
@@ -88,10 +88,10 @@ export default {
     data() {
         return {
             project: [],
-            request: [
+            activities: [
                 {
-                    product: '',
-                    price: '',
+                    service: '',
+                    amount: '',
                     frequency: '',
                 }
             ],
@@ -113,19 +113,19 @@ export default {
         },
 
         addRow() {
-            this.request.push({
+            this.activities.push({
                 product: '',
                 price: '',
                 frequency : ''
             })
         },
         removeRow(index){
-            this.request.splice(index,1)
+            this.activities.splice(index,1)
         },
         createActivityRequest(){
             this.activityRequest
             this.description
-            const data = this.request
+            const data = this.activities
 
             console.log(data);
             alert(JSON.stringify(data))

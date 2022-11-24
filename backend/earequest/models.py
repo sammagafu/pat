@@ -22,16 +22,20 @@ class ActivityRequest(models.Model):
         verbose_name_plural = _("Activity Requests")
 
     def __str__(self):
-        return self.request
+        return self.requestedbby.email
 
-    def save(self):
-        if not self.slug:
-            self.slug = slugify(self.request)
-        self.slug = slugify(self.request)
-        super().save()
+    @property
+    def activities(self):
+        return self.activities.set_all()
+
+    # def save(self,*args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.request)
+    #     self.slug = slugify(self.request)
+    #     super().save(*args, **kwargs)
 
 class ActivityRequestDetails(models.Model):
-    activity = models.ForeignKey(ActivityRequest, verbose_name=_("Activity"), on_delete=models.CASCADE)
+    activity = models.ForeignKey(ActivityRequest, verbose_name=_("Activity"),related_name='activities', on_delete=models.CASCADE)
     service = models.CharField(_("Service or Product"), max_length=160)
     amount = models.DecimalField(_("Price Amount"), max_digits=10, decimal_places=2)
     frequency = models.IntegerField(_("Frequency"))

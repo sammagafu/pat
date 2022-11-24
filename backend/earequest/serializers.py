@@ -2,20 +2,23 @@ from rest_framework import serializers
 from .models import ActivityRequestDetails,ActivityRequest
 
 class ActivityRequestDetailsSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
     class Meta:
         model = ActivityRequestDetails
-        fields = ['activity', 'service', 'amount','frequency']
+        fields = ['id','activity', 'service', 'amount','frequency']
+        read_only_fields = ("id",'activity')
 
 
 class ActivityRequestSerializer(serializers.ModelSerializer):
-    activity = ActivityRequestDetailsSerializer(many=True)
+    activities = ActivityRequestDetailsSerializer(many=True)
 
     class Meta:
         model = ActivityRequest
-        fields = ['project','requestdate','description','requestedbby','approvedby','approveddate','activity']
+        fields = ['project','description','requestedbby','approvedby','approveddate', 'activities']
+        read_only_fields = ("requestedby",)
     
     def create(self, validated_data):
-        tracks_data = validated_data.pop('activity')
+        tracks_data = validated_data.pop('activities')
 
         arequest = ActivityRequest.objects.create(**validated_data)
         for track_data in tracks_data:
