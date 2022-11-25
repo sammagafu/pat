@@ -15,7 +15,7 @@ class ActivityRequest(models.Model):
     declined = models.BooleanField(_("declined"),default=False)
     requestedbby = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="requestedBy")
     approvedby = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="approvedBy",null=True,blank=True)
-    approveddate = models.DateField(_("Approved Date"), auto_now=False, auto_now_add=False)
+    approveddate = models.DateField(_("Approved Date"), auto_now=False, auto_now_add=False,null=True,blank=True)
 
     class Meta:
         verbose_name = _("Activity Request")
