@@ -39,12 +39,12 @@
                                             <div class="col-md-3">
                                                 <label :for="`product${index}`">Service or Product</label>
                                                 <input type="text" placeholder="Product Name" class="form-control"
-                                                   v-model="count.product" :name="`product${index}`" :id="`product${index}`">
+                                                   v-model="count.service" :name="`product${index}`" :id="`product${index}`">
                                             </div>
                                             <div class="col-md-3">
                                                 <label :for="`amount${index}`">Service or Product price</label>
                                                 <input type="number" placeholder="100000" class="form-control"
-                                                    step="1000" v-model="count.price" :name="`amount${index}`" :id="`amount${index}`">
+                                                    step="1000" v-model="count.amount" :name="`amount${index}`" :id="`amount${index}`">
                                             </div>
                                             <div class="col-md-3">
                                                 <label :for="`frequency${index}`">Frequency</label>
@@ -114,8 +114,8 @@ export default {
 
         addRow() {
             this.activities.push({
-                product: '',
-                price: '',
+                service: '',
+                amount: '',
                 frequency : ''
             })
         },
@@ -123,12 +123,19 @@ export default {
             this.activities.splice(index,1)
         },
         createActivityRequest(){
-            this.activityRequest
-            this.description
-            const data = this.activities
-
-            console.log(data);
-            alert(JSON.stringify(data))
+            const data = {
+                project:this.activityRequest,
+                description:this.description,
+                requestedbby:JSON.parse(localStorage.getItem('userid')),
+                activities:this.activities,
+            }
+            console.log(data)
+            axios.post("http://localhost:8000/api/v1/earequest/",data)
+            .then(data=>{
+                console.log(data)
+                //clear form here
+            })
+            // alert(JSON.stringify(data))
         }
 
 
