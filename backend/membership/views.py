@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 
-from .serializer import RegisterSerializer,UpdateSerializer
+from .serializer import RegisterSerializer,UpdateSerializer,UsersProfile
 from . models import User
 from rest_framework import generics
 
@@ -34,7 +34,7 @@ class UsersDetail(generics.RetrieveDestroyAPIView):
 class UserProfile(generics.RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
-    serializer_class = UpdateSerializer
+    serializer_class = UsersProfile
 
     def get_object(self):
         obj = get_object_or_404(User, pk=self.request.user.id)
