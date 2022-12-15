@@ -39,3 +39,11 @@ class UserProfile(generics.RetrieveUpdateAPIView):
     def get_object(self):
         obj = get_object_or_404(User, pk=self.request.user.id)
         return obj
+class UpdateUserProfile(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UsersProfile
+
+    def get_object(self):
+        obj = get_object_or_404(User, pk=self.request.user.id)
+        return obj

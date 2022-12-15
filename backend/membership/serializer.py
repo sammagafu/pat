@@ -62,9 +62,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('password', )
+        exclude = ('password','email')
 
 class UsersProfile(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('password', )
+        exclude = ('password',)
+        read_only_fields = ["email","memberId"]
