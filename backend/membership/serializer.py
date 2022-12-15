@@ -62,10 +62,11 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name','last_name','middle_name','phone','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year','typeofmember','memberId']
+        fields = '__all__'
+        exclude = ('password', )
 
 class UsersProfile(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['memberId',
-         'phone','typeofmember','region','organization','profession','areaofwork','mctnumber','gender','avatar','collage','year','get_avatar','get_user_fullname','is_active','is_approved','is_staff']
+        fields = '__all__'
+        exclude = ('password', )
