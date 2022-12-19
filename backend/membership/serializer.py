@@ -69,3 +69,8 @@ class UsersProfile(serializers.ModelSerializer):
         model = User
         exclude = ('password',)
         read_only_fields = ["email","memberId"]
+
+class UpdateProfileImage(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['avatar']

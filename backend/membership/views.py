@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 
-from .serializer import RegisterSerializer,UpdateSerializer,UsersProfile
+from .serializer import RegisterSerializer,UpdateProfileImage,UsersProfile
 from . models import User
 from rest_framework import generics
 
@@ -39,10 +39,10 @@ class UserProfile(generics.RetrieveUpdateAPIView):
     def get_object(self):
         obj = get_object_or_404(User, pk=self.request.user.id)
         return obj
-class UpdateUserProfile(generics.RetrieveUpdateAPIView):
+class UpdateUserProfilePicture(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
-    serializer_class = UsersProfile
+    serializer_class = UpdateProfileImage
 
     def get_object(self):
         obj = get_object_or_404(User, pk=self.request.user.id)
