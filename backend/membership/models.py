@@ -6,10 +6,15 @@ from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django_resized import ResizedImageField
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.utils import timezone
 import random
+import os
+
+
+# 
+import base64
+from io import BytesIO
+from PIL import Image
 
 class UserManager(BaseUserManager):
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
@@ -192,6 +197,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.avatar:
             return 'http://127.0.0.1:8000' + self.avatar.url
         return ''
+    
+    def get_base64_image(self):
+        with open(self.avatar.path, 'rb') as f:
+            img = Image.open(f)
+            convertimage = img.convert('RGB')
+            buffered = BytesIO()
+            convertimage.save(buffered, format="JPEG")
+            img_str = base64.b64encode(buffered.getvalue())
+            return img_str.decode('utf-8')
+    
 
     def save(self,*args, **kwargs):
         if self.typeofmember == "Ordinary Member":
